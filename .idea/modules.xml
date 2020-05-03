@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Lesson_List_View/.idea/Lesson_List_View.iml" filepath="$PROJECT_DIR$/../Lesson_List_View/.idea/Lesson_List_View.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MagicDashboard.iml" filepath="$PROJECT_DIR$/.idea/MagicDashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Print_Assessment/.idea/Print_Assessment.iml" filepath="$PROJECT_DIR$/../Print_Assessment/.idea/Print_Assessment.iml" />
     </modules>
   </component>
 </project>

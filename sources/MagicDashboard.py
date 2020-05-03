@@ -2,6 +2,9 @@ import tkinter as tk
 import DashLeaderBoard
 from tkinter import ttk, PhotoImage
 
+import DataCapture
+
+
 class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
         super().__init__(parent,*args,**kwargs)
@@ -21,7 +24,7 @@ class MagicDashboard(tk.Frame):
         s.configure('dash2header.Label', background='gray16', foreground='snow',
                     font=('comic sans', 12, 'bold', 'italic'))
         s.configure('dash3data.Label', background='steel blue', foreground='snow',
-                    font=('courier', 38, 'bold', 'italic'))
+                    font=('courier', 20, 'bold', 'italic'))
         s.configure('dash2data.Label', background='gray16', foreground='snow', font=('courier', 40, 'bold'))
 
         self.launcher_display()
@@ -29,13 +32,15 @@ class MagicDashboard(tk.Frame):
         self.info_display()
 
     def info_display(self):
+        lesson_count = DataCapture.get_Lessons_count()
         self.dashboard_info_labelframe = ttk.LabelFrame(self, text="Learning Info", style="dash.TLabelframe")
         self.dashboard_info_labelframe.grid(row=1, column=0, pady=30)
         self.lessons_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
                                       highlightbackground='gray16', highlightthickness=3)
         self.lessons_header_label = ttk.Label(self.lessons_frame, text=" Lessons ", style="dashheader.Label")
-        self.lessons_data_label = ttk.Label(self.lessons_frame, text="10",
+        self.lessons_data_label = ttk.Label(self.lessons_frame, text=lesson_count[0],
                                             style="dashdata.Label")
+        student_count = DataCapture.get_participants_count()
         self.lessons_frame.grid(row=0, column=0, sticky=tk.NW, padx=10, pady=10)
         self.lessons_header_label.grid(row=0, column=0)
         self.lessons_data_label.grid(row=1, column=0, pady=5)
@@ -43,34 +48,43 @@ class MagicDashboard(tk.Frame):
                                            highlightbackground='aquamarine', highlightthickness=3)
         self.participants_header_label = ttk.Label(self.participants_frame, text=" Participants ",
                                                    style="dash2header.Label")
-        self.participants_data_label = ttk.Label(self.participants_frame, text="22",
+        self.participants_data_label = ttk.Label(self.participants_frame, text=student_count[0],
                                                  style="dash2data.Label")
         self.participants_frame.grid(row=0, column=1, sticky=tk.NW, padx=40, pady=10)
         self.participants_header_label.grid(row=0, column=0)
         self.participants_data_label.grid(row=1, column=0, pady=5)
+
+
         self.leader_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
-                                     highlightbackground='gray16', highlightthickness=3)
+                                     highlightbackground='gray16', highlightthickness=3,width=150,height=60)
         self.leader_header_label = ttk.Label(self.leader_frame, text=" Stars ",
                                              style="dashheader.Label")
-        self.leader_data_label = ttk.Label(self.leader_frame, text="Vishal",
+        self.leader_data_label = ttk.Label(self.leader_frame,wraplength=200,
                                            style="dash3data.Label")
-        self.leader_frame.grid(row=0, column=2, sticky=tk.NE, padx=40, pady=10)
+        self.leader_frame.grid(row=0, column=2, sticky=tk.NE, padx=40, pady=10,ipadx=20,ipady=20)
+        self.leader_frame.grid_propagate(False)
         self.leader_header_label.grid(row=0, column=0)
         self.leader_data_label.grid(row=1, column=0, pady=10)
+        names = DataCapture.get_badge_1_count()
+        n_index = 0
+        self.show_names(names, n_index)
+        flash_card_count = lesson_count[0]*3
         self.flash_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
                                     highlightbackground='gray16', highlightthickness=3)
         self.flash_header_label = ttk.Label(self.flash_frame, text=" Flashcards ",
                                             style="dashheader.Label")
-        self.flash_data_label = ttk.Label(self.flash_frame, text="51",
+        self.flash_data_label = ttk.Label(self.flash_frame, text=flash_card_count,
                                           style="dashdata.Label")
         self.flash_frame.grid(row=0, column=4, sticky=tk.NE, padx=40, pady=8)
         self.flash_header_label.grid(row=0, column=0)
         self.flash_data_label.grid(row=1, column=0)
+
+        no_steps = DataCapture.get_skill_steps_count()
         self.skill_frame = tk.Frame(self.dashboard_info_labelframe, background="gray16",
                                     highlightbackground='aquamarine', highlightthickness=3)
         self.skill_header_label = ttk.Label(self.skill_frame, text=" Skill Steps ",
                                             style="dash2header.Label")
-        self.skill_data_label = ttk.Label(self.skill_frame, text="60",
+        self.skill_data_label = ttk.Label(self.skill_frame, text=no_steps[0],
                                           style="dash2data.Label")
         self.skill_frame.grid(row=0, column=3, padx=40, sticky=tk.NE, pady=10)
         self.skill_header_label.grid(row=0, column=0)
@@ -131,6 +145,11 @@ class MagicDashboard(tk.Frame):
         self.create_button.grid(row=1, column=1, padx=20, sticky=tk.SW)
         self.player_button.grid(row=0, column=2, rowspan=2, padx=20, sticky=tk.NSEW)
 
+    def show_names(self, names,n_index):
+        if(n_index == len(names)):
+            n_index = 0
+        self.leader_data_label.configure(text = names[n_index][0])
+        self.leader_frame.after(10000,self.show_names,names,n_index+1)
 
 if __name__== "__main__":
     dashboard_app = tk.Tk()
