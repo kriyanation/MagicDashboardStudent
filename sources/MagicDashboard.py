@@ -191,49 +191,49 @@ class MagicDashboard(tk.Frame):
         self.leader_frame.after(10000,self.show_names,names,n_index+1)
 
     def launch_lesson_edit(self):
-       # if os.name == "nt":
+        if os.name == "nt":
             print(os.getcwd()+os.path.sep+"app"+os.path.sep+"lesson_edit.exe")
-           # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
 
     def launch_flashcard(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
 
     def launch_assessment_pdf(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
 
     def launch_class_data(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
 
     def launch_player(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
 
     def launch_pdf_notes(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
 
     def lessons_list(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
 
     def create_lesson(self):
-        # if os.name == "nt":
+         if os.name == "nt":
             print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
-            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
 
     def launch_timer(self):
-        # if os.name == "nt":
-        print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
-        # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+        if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_timer.exe")
+            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_timer.exe")
 
 
 if __name__== "__main__":
