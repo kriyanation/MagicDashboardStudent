@@ -121,12 +121,14 @@ class MagicDashboard(tk.Frame):
 
         self.bday_label.pack(pady=20)
         self.bday_image.pack(pady=20)
-        bday_song= "../images/bday_song.mp3"
+        current_location = os.getcwd()
+        file_song_path = os.path.abspath(os.path.join(current_location,"..","images","bday_song.mp3"))
+
         if sys.platform == "win32":
-            os.startfile(bday_song)
+            os.startfile(file_song_path)
         else:
             opener = "open" if sys.platform == "darwin" else "xdg-open"
-            subprocess.call([opener, bday_song])
+            subprocess.call([opener, file_song_path])
 
         b = ttk.Button(win, text="Close", style='Green.TButton', command=win.destroy)
         b.pack()
