@@ -1,6 +1,9 @@
+import os
+import subprocess
+import sys
 import tkinter as tk
 import DashLeaderBoard
-from tkinter import ttk, PhotoImage
+from tkinter import ttk, PhotoImage, simpledialog
 
 import DataCapture
 
@@ -13,8 +16,11 @@ class MagicDashboard(tk.Frame):
         s.theme_use('clam')
         s.configure('time.Label', background='dark slate gray', foreground='peachpuff2', font=('arial', 30, 'bold'))
         s.configure('dash.TButton', background='gray25', foreground='peachpuff2', borderwidth=0)
+        s.configure('Green.TButton', background='dark slate gray', foreground='PeachPuff2')
         s.map('dash.TButton', background=[('pressed', 'peachpuff'), ('active', '!disabled', 'gray44')],
               foreground=[('pressed', 'peachpuff2'), ('active', 'peachpuff2')])
+        s.map('Green.TButton', background=[('active', '!disabled', 'dark olive green'), ('pressed', 'PeachPuff2')],
+             foreground=[('pressed', 'PeachPuff2'), ('active', 'PeachPuff2')])
 
         s.configure('dash.TLabelframe', background='gray25',bordercolor='peachpuff2',borderwidth=3)
         s.configure('dash.TLabelframe.Label', font=('courier', 14, 'bold', 'italic'))
@@ -63,7 +69,7 @@ class MagicDashboard(tk.Frame):
                                            style="dash3data.Label")
         self.leader_frame.grid(row=0, column=2, sticky=tk.NE, padx=40, pady=10,ipadx=20,ipady=20)
         self.leader_frame.grid_propagate(False)
-        self.leader_header_label.grid(row=0, column=0)
+        self.leader_header_label.grid(row=0, column=0,sticky=tk.EW,padx=50)
         self.leader_data_label.grid(row=1, column=0, pady=10)
         names = DataCapture.get_badge_1_count()
         n_index = 0
@@ -92,8 +98,38 @@ class MagicDashboard(tk.Frame):
         self.badge_image_bday = tk.PhotoImage(file='../images/BDay.png')
         self.bday_button = ttk.Button(self.dashboard_info_labelframe, image=self.badge_image_bday,
                                       style="dash.TButton",
-                                      command="")
+                                      command=self.bday_play)
         self.bday_button.grid(row=0, column=5, padx=40, sticky=tk.NE, pady=3)
+
+    def bday_play(self):
+
+        self.name = simpledialog.askstring("B'Day Student", "Name",
+                                        parent=self)
+        if self.name is None:
+            self.name = ""
+
+        win = tk.Toplevel()
+        win.wm_title("Happy B'Day "+self.name)
+        win.wm_geometry('500x400+500+200')
+        win.resizable(False, False)
+        win.configure(background='dark slate gray')
+        win.attributes('-topmost', 'true')
+        self.bday_label = ttk.Label(win, text="Happy B'Day "+self.name,
+                                            style="time.Label")
+        self.bday_wish = tk.PhotoImage(file='../images/bday_wish.png')
+        self.bday_image = ttk.Label(win, image=self.bday_wish)
+
+        self.bday_label.pack(pady=20)
+        self.bday_image.pack(pady=20)
+        bday_song= "../images/bday_song.mp3"
+        if sys.platform == "win32":
+            os.startfile(bday_song)
+        else:
+            opener = "open" if sys.platform == "darwin" else "xdg-open"
+            subprocess.call([opener, bday_song])
+
+        b = ttk.Button(win, text="Close", style='Green.TButton', command=win.destroy)
+        b.pack()
 
     def launcher_display(self):
         self.dashboard_launcher_labelframe = ttk.LabelFrame(self, text="Launcher", style="dash.TLabelframe")
@@ -109,32 +145,33 @@ class MagicDashboard(tk.Frame):
         self.image_create = PhotoImage(file="../images/create_lesson.png")
         self.timer_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_timer,
                                        style="dash.TButton",
-                                       command="")
+                                       command=self.launch_timer)
         self.edit_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_edit,
                                       style="dash.TButton",
-                                      command="")
+                                      command=self.launch_lesson_edit)
         self.flash_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_flash,
                                        style="dash.TButton",
-                                       command="")
+                                       command=self.launch_flashcard)
         self.print_assessment_button = ttk.Button(self.dashboard_launcher_labelframe, text="",
                                                   image=self.image_print_assessment,
                                                   style="dash.TButton",
-                                                  command="")
+                                                  command=self.launch_assessment_pdf)
+
         self.class_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_class,
                                        style="dash.TButton",
-                                       command="")
+                                       command=self.launch_class_data)
         self.player_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_player,
                                         style="dash.TButton",
-                                        command="")
+                                        command=self.launch_player)
         self.notes_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.lesson_notes,
                                        style="dash.TButton",
-                                       command="")
+                                       command=self.launch_pdf_notes)
         self.lessons_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.list_lessons,
                                          style="dash.TButton",
-                                         command="")
+                                         command=self.lessons_list)
         self.create_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_create,
                                         style="dash.TButton",
-                                        command="")
+                                        command=self.create_lesson)
         self.timer_button.grid(row=0, column=0, padx=20, sticky=tk.NW)
         self.edit_button.grid(row=0, column=1, padx=20, sticky=tk.NW)
         self.print_assessment_button.grid(row=0, column=4, sticky=tk.NE)
@@ -151,11 +188,62 @@ class MagicDashboard(tk.Frame):
         self.leader_data_label.configure(text = names[n_index][0])
         self.leader_frame.after(10000,self.show_names,names,n_index+1)
 
+    def launch_lesson_edit(self):
+       # if os.name == "nt":
+            print(os.getcwd()+os.path.sep+"app"+os.path.sep+"lesson_edit.exe")
+           # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
+
+    def launch_flashcard(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
+
+    def launch_assessment_pdf(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
+
+    def launch_class_data(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
+
+    def launch_player(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
+
+    def launch_pdf_notes(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
+
+    def lessons_list(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
+
+    def create_lesson(self):
+        # if os.name == "nt":
+            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+            # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+
+    def launch_timer(self):
+        # if os.name == "nt":
+        print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+        # os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+
+
 if __name__== "__main__":
     dashboard_app = tk.Tk()
     dashboard_app.configure(background="gray25")
     dashboard_app.title("Learning Room Dashboard")
-    dashboard_app.geometry("800x800")
+    screen_width = dashboard_app.winfo_screenwidth()
+    screen_height = dashboard_app.winfo_screenheight()
+
+    screen_half_width = int(dashboard_app.winfo_screenwidth())
+    screen_half_height = int(dashboard_app.winfo_screenheight())
+    dashboard_app.geometry("1500x700+300+200")
     frame = MagicDashboard(dashboard_app)
     #dashboard_app.rowconfigure(0,weight=1)
     dashboard_app.columnconfigure(0, weight=1)
