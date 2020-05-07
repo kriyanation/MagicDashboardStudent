@@ -192,48 +192,49 @@ class MagicDashboard(tk.Frame):
 
     def launch_lesson_edit(self):
         if os.name == "nt":
-            print(os.getcwd()+os.path.sep+"app"+os.path.sep+"lesson_edit.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
+            #os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
 
     def launch_flashcard(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_revise.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
 
     def launch_assessment_pdf(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_assessment_print.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
 
     def launch_class_data(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_class_data.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
 
     def launch_player(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_play.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
 
     def launch_pdf_notes(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_pdf_notes.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
 
     def lessons_list(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_list.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_List"+os.path.sep+"Lesson_List.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
 
     def create_lesson(self):
          if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_create.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
 
     def launch_timer(self):
         if os.name == "nt":
-            print(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_timer.exe")
-            os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_timer.exe")
+            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
+            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
 
 
 if __name__== "__main__":
@@ -251,5 +252,4 @@ if __name__== "__main__":
     dashboard_app.columnconfigure(0, weight=1)
     frame.grid(row=0,column=0)
     dashboard_app.mainloop()
-
 
