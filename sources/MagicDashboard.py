@@ -2,10 +2,21 @@ import os
 import subprocess
 import sys
 import tkinter as tk
-import DashLeaderBoard
+
 from tkinter import ttk, PhotoImage, simpledialog
 
-import DataCapture
+import DataCaptureDashboard
+import FlashCard
+import LessonList
+import Lesson_List_Display
+import MagicEditWizard
+import Timer_Display
+import assessment_viewer
+
+import create_explainer_content
+import magic_classroom_info
+import magiccontainer
+import snapshot_view
 
 
 class MagicDashboard(tk.Frame):
@@ -38,7 +49,7 @@ class MagicDashboard(tk.Frame):
         self.info_display()
 
     def info_display(self):
-        lesson_count = DataCapture.get_Lessons_count()
+        lesson_count = DataCaptureDashboard.get_Lessons_count()
         self.dashboard_info_labelframe = ttk.LabelFrame(self, text="Learning Info", style="dash.TLabelframe")
         self.dashboard_info_labelframe.grid(row=1, column=0, pady=30)
         self.lessons_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
@@ -46,7 +57,7 @@ class MagicDashboard(tk.Frame):
         self.lessons_header_label = ttk.Label(self.lessons_frame, text=" Lessons ", style="dashheader.Label")
         self.lessons_data_label = ttk.Label(self.lessons_frame, text=lesson_count[0],
                                             style="dashdata.Label")
-        student_count = DataCapture.get_participants_count()
+        student_count = DataCaptureDashboard.get_participants_count()
         self.lessons_frame.grid(row=0, column=0, sticky=tk.NW, padx=10, pady=10)
         self.lessons_header_label.grid(row=0, column=0)
         self.lessons_data_label.grid(row=1, column=0, pady=5)
@@ -71,7 +82,7 @@ class MagicDashboard(tk.Frame):
         self.leader_frame.grid_propagate(False)
         self.leader_header_label.grid(row=0, column=0,sticky=tk.EW,padx=50)
         self.leader_data_label.grid(row=1, column=0, pady=10)
-        names = DataCapture.get_badge_1_count()
+        names = DataCaptureDashboard.get_badge_1_count()
         n_index = 0
         self.show_names(names, n_index)
         flash_card_count = lesson_count[0]*3
@@ -85,7 +96,7 @@ class MagicDashboard(tk.Frame):
         self.flash_header_label.grid(row=0, column=0)
         self.flash_data_label.grid(row=1, column=0)
 
-        no_steps = DataCapture.get_skill_steps_count()
+        no_steps = DataCaptureDashboard.get_skill_steps_count()
         self.skill_frame = tk.Frame(self.dashboard_info_labelframe, background="gray16",
                                     highlightbackground='aquamarine', highlightthickness=3)
         self.skill_header_label = ttk.Label(self.skill_frame, text=" Skill Steps ",
@@ -191,50 +202,71 @@ class MagicDashboard(tk.Frame):
         self.leader_frame.after(10000,self.show_names,names,n_index+1)
 
     def launch_lesson_edit(self):
-        if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
-            #os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
+
+        launch_edit = MagicEditWizard.MagicEditWizard(self)
+        launch_edit.geometry("1000x700+400+200")
+        #if os.name == "nt":
+         #   print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
+         #   #os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
+         #   subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
 
     def launch_flashcard(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
+        launch_flashcard = FlashCard.MagicFlashApplication(self)
+        launch_flashcard.geometry("900x800+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
 
     def launch_assessment_pdf(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
+        launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
+        launch_assessment.geometry("900x800+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
 
     def launch_class_data(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
+        launch_class = magic_classroom_info.MagicClassRoomData(self)
+        launch_class.geometry("900x800+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
 
     def launch_player(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
+        launch_player = magiccontainer.MagicApplication(self)
+        launch_player.geometry("1000x800+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
 
     def launch_pdf_notes(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+        launch_notes = snapshot_view.SnapshotView(self)
+        launch_notes.geometry("200x200+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
 
     def lessons_list(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_List"+os.path.sep+"Lesson_List.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+        launch_lessonlist = Lesson_List_Display.MagicLessonList(self)
+        launch_lessonlist.geometry("900x700+100+100")
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_List"+os.path.sep+"Lesson_List.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
 
     def create_lesson(self):
-         if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
+        launch_Create = create_explainer_content.MagicWizard(self)
+        launch_Create.geometry("1000x700+200+200")
+
+
+         # if os.name == "nt":
+         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
+         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
 
     def launch_timer(self):
-        if os.name == "nt":
-            print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
-            subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
+        launch_timer = Timer_Display.TimerDisplay(self)
+        launch_timer.geometry("240x250+200+200")
+        #if os.name == "nt":
+         #   print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
+          #  subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
 
 
 if __name__== "__main__":

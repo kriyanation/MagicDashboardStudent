@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../Assessment_Generate">
+      <sourceFolder url="file://$MODULE_DIR$/../Assessment_Generate/sources" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicClassRoomData">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicClassRoomData/sources" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/sources" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicEditWizard">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicEditWizard/source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicPDFSnapshot">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicPDFSnapshot/source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicRoomPlayer">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicRoomPlayer/source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicRoomRecap">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicRoomRecap/sources" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicRoomWizard">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicRoomWizard/source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicTimer">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicTimer/sources" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

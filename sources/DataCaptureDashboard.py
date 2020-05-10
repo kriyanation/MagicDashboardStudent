@@ -8,7 +8,7 @@ TEST_ROW = 16
 
 
 file_root = os.path.abspath(os.getcwd())
-db = file_root+os.path.sep+"MagicRoom.db"
+db = file_root+os.path.sep+".."+os.path.sep+"MagicRoom.db"
 
 
 
