@@ -23,12 +23,16 @@ import magiccontainer
 import snapshot_view
 import tooltip
 
-logger = logging.getLogger("MagicLogger")
-logger.setLevel(logging.INFO)
+
 
 # add a rotating handler
 handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
                               backupCount=3)
+FORMAT = "%(asctime)s- %(name)s: %(message)s"
+logging.basicConfig(format=FORMAT)
+logger = logging.getLogger("MagicLogger")
+logger.setLevel(logging.DEBUG)
+
 logger.addHandler(handler)
 
 class MagicDashboard(tk.Frame):
@@ -36,7 +40,7 @@ class MagicDashboard(tk.Frame):
         super().__init__(parent,*args,**kwargs)
 
 
-
+        logger.info("Entering MagicDashboard Initialize")
         self.configure(background="gray25")
         s = ttk.Style()
         s.theme_use('clam')
@@ -239,14 +243,14 @@ class MagicDashboard(tk.Frame):
         self.player_button.grid(row=0, column=2, rowspan=2, padx=20, sticky=tk.NSEW)
 
     def show_names(self, names,n_index):
-        try:
+        #try:
             if(n_index == len(names)):
                 n_index = 0
             self.leader_data_label.configure(text = names[n_index][0])
             self.leader_frame.after(10000,self.show_names,names,n_index+1)
-        except:
-            logger.info("Exception in retrieving lessons information")
-            logger.info(traceback.print_exc())
+        #except:
+         #   logger.info("Exception in retrieving lessons information")
+          #  logger.info(traceback.print_exc())
 
     def launch_lesson_edit(self):
 
