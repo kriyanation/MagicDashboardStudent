@@ -277,7 +277,7 @@ class MagicDashboard(tk.Frame):
     def launch_lesson_edit(self):
 
         launch_edit = MagicEditWizard.MagicEditWizard(self)
-        launch_edit.geometry("1000x700+400+200")
+        launch_edit.geometry("1000x700+100+100")
         #if os.name == "nt":
          #   print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
          #   #os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
@@ -285,21 +285,21 @@ class MagicDashboard(tk.Frame):
 
     def launch_flashcard(self):
         launch_flashcard = FlashCard.MagicFlashApplication(self)
-        launch_flashcard.geometry("900x800+100+100")
+        launch_flashcard.geometry("1000x700+100+100")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
 
     def launch_assessment_pdf(self):
         launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
-        launch_assessment.geometry("900x800+100+100")
+        launch_assessment.geometry("300x300+100+100")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
 
     def launch_class_data(self):
         launch_class = magic_classroom_info.MagicClassRoomData(self)
-        launch_class.geometry("900x800+100+100")
+        launch_class.geometry("1000x800+100+100")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
@@ -320,14 +320,14 @@ class MagicDashboard(tk.Frame):
 
     def lessons_list(self):
         launch_lessonlist = Lesson_List_Display.MagicLessonList(self)
-        launch_lessonlist.geometry("900x700+100+100")
+        launch_lessonlist.geometry("1000x700+100+100")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_List"+os.path.sep+"Lesson_List.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
 
     def create_lesson(self):
         launch_Create = create_explainer_content.MagicWizard(self)
-        launch_Create.geometry("1000x700+200+200")
+        launch_Create.geometry("1000x700+100+100")
 
 
          # if os.name == "nt":
@@ -353,7 +353,7 @@ if __name__== "__main__":
 
     screen_half_width = int(dashboard_app.winfo_screenwidth())
     screen_half_height = int(dashboard_app.winfo_screenheight())
-    dashboard_app.geometry("1500x700+300+200")
+    dashboard_app.geometry("1000x700+100+100")
     frame = MagicDashboard(dashboard_app)
     #dashboard_app.rowconfigure(0,weight=1)
     dashboard_app.columnconfigure(0, weight=1)
