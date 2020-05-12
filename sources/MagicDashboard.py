@@ -47,10 +47,10 @@ class MagicDashboard(tk.Frame):
         s.theme_use('clam')
         s.configure('time.Label', background='dark slate gray', foreground='peachpuff2', font=('arial', 30, 'bold'))
         s.configure('dash.TButton', background='gray25', foreground='peachpuff2', borderwidth=0)
-        s.configure('Green.TButton', background='dark slate gray', foreground='PeachPuff2')
+        s.configure('dash1.TButton', background='dark slate gray', foreground='PeachPuff2')
         s.map('dash.TButton', background=[('pressed', 'peachpuff'), ('active', '!disabled', 'gray44')],
               foreground=[('pressed', 'peachpuff2'), ('active', 'peachpuff2')])
-        s.map('Green.TButton', background=[('active', '!disabled', 'dark olive green'), ('pressed', 'PeachPuff2')],
+        s.map('dash1.TButton', background=[('active', '!disabled', 'dark olive green'), ('pressed', 'PeachPuff2')],
              foreground=[('pressed', 'PeachPuff2'), ('active', 'PeachPuff2')])
 
         s.configure('dash.TLabelframe', background='gray25',bordercolor='peachpuff2',borderwidth=3)
@@ -189,7 +189,7 @@ class MagicDashboard(tk.Frame):
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, file_song_path])
 
-        b = ttk.Button(win, text="Close", style='Green.TButton', command=win.destroy)
+        b = ttk.Button(win, text="Close", style='dash1.TButton', command=win.destroy)
         b.pack()
 
     def launcher_display(self):
