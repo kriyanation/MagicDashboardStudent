@@ -2,6 +2,7 @@ import logging
 import os
 import subprocess
 import traceback
+import webbrowser
 from logging.handlers import RotatingFileHandler
 
 import sys
@@ -63,14 +64,30 @@ class MagicDashboard(tk.Frame):
                     font=('courier', 20, 'bold', 'italic'))
         s.configure('dash2data.Label', background='gray16', foreground='snow', font=('courier', 40, 'bold'))
 
+
+
+        self.image_logo = PhotoImage(file="../images/logo_bg.png")
+        self.logo_button = ttk.Button(self, text="", image=self.image_logo,
+                                       style="dash.TButton",width=10,
+                                       command=self.launch_website)
+
+
         self.launcher_display()
 
         self.info_display()
 
+        self.logo_button.grid(row=0, column=0, sticky=tk.N)
+
+    def launch_content(self):
+        webbrowser.open_new_tab("https://www.dropbox.com/home/Learning%20Room")
+
+    def launch_website(self):
+        webbrowser.open_new_tab("http://www.wondersky.in/")
+
     def info_display(self):
         lesson_count = DataCaptureDashboard.get_Lessons_count()
         self.dashboard_info_labelframe = ttk.LabelFrame(self, text="Learning Info", style="dash.TLabelframe")
-        self.dashboard_info_labelframe.grid(row=1, column=0, pady=30)
+        self.dashboard_info_labelframe.grid(row=2, column=0, pady=30)
         self.lessons_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
                                       highlightbackground='gray16', highlightthickness=3)
         self.lessons_frame.tooltip = tooltip.ToolTip(self.lessons_frame, "Number of Lessons Created")
@@ -177,7 +194,7 @@ class MagicDashboard(tk.Frame):
 
     def launcher_display(self):
         self.dashboard_launcher_labelframe = ttk.LabelFrame(self, text="Launcher", style="dash.TLabelframe")
-        self.dashboard_launcher_labelframe.grid(row=0, column=0)
+        self.dashboard_launcher_labelframe.grid(row=1, column=0)
         self.image_timer = PhotoImage(file="../images/Timer.png")
         self.image_edit = PhotoImage(file="../images/edit_lesson.png")
         self.image_flash = PhotoImage(file="../images/flashcards.png")
@@ -190,6 +207,10 @@ class MagicDashboard(tk.Frame):
         self.timer_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_timer,
                                        style="dash.TButton",
                                        command=self.launch_timer)
+        self.image_content = PhotoImage(file="../images/content.png")
+        self.content_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_content,
+                                       style="dash.TButton",
+                                       command=self.launch_content)
         self.timer_button.tooltip = tooltip.ToolTip(self.timer_button, "Launch Timer Screen")
 
         self.edit_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_edit,
@@ -240,7 +261,8 @@ class MagicDashboard(tk.Frame):
         self.notes_button.grid(row=1, column=3, padx=50, sticky=tk.SE)
         self.lessons_button.grid(row=1, column=0, sticky=tk.SW)
         self.create_button.grid(row=1, column=1, padx=20, sticky=tk.SW)
-        self.player_button.grid(row=0, column=2, rowspan=2, padx=20, sticky=tk.NSEW)
+        self.player_button.grid(row=0, column=2, padx=20, sticky=tk.NE)
+        self.content_button.grid(row=1, column=2, sticky=tk.SW,padx=20)
 
     def show_names(self, names,n_index):
         #try:
