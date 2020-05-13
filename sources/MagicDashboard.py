@@ -268,6 +268,8 @@ class MagicDashboard(tk.Frame):
         #try:
             if(n_index == len(names)):
                 n_index = 0
+            if len(names) == 0:
+                return
             self.leader_data_label.configure(text = names[n_index][0])
             self.leader_frame.after(10000,self.show_names,names,n_index+1)
         #except:
