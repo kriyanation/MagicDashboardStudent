@@ -63,6 +63,8 @@ class MagicDashboard(tk.Frame):
         s.configure('dash3data.Label', background='steel blue', foreground='snow',
                     font=('courier', 20, 'bold', 'italic'))
         s.configure('dash2data.Label', background='gray16', foreground='snow', font=('courier', 40, 'bold'))
+        s.configure('dash4header.Label', background='gray25', foreground='snow',
+                    font=('comic sans', 10, 'bold', 'italic'))
 
 
 
@@ -294,7 +296,7 @@ class MagicDashboard(tk.Frame):
 
     def launch_assessment_pdf(self):
         launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
-        launch_assessment.geometry("300x300+20+20")
+        launch_assessment.geometry("700x300+20+20")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
