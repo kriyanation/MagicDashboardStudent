@@ -24,17 +24,25 @@ import magiccontainer
 import snapshot_view
 import tooltip
 
+from PIL import Image, ImageTk
 
-
-# add a rotating handler
 handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
                               backupCount=3)
-FORMAT = "%(asctime)s- %(name)s: %(message)s"
-logging.basicConfig(format=FORMAT)
+form = logging.Formatter("%(asctime)s- %(name)s: %(message)s")
 logger = logging.getLogger("MagicLogger")
+handler.setFormatter(form)
 logger.setLevel(logging.DEBUG)
-
 logger.addHandler(handler)
+
+BACKGROUND_COLOR = "gray18"
+BOX_BACKGROUND_COLOR = "gray21"
+BOX_FOREGROUND_COLOR = "white"
+FOREGROUND_COLOR = "peachpuff2"
+ACTIVE_BUTTON_COLOR = "gray44"
+BOX_BUTTON_BACKGROUND_COLOR="dark slate gray"
+BOX_BUTTON_FOREGROUND_COLOR= "white"
+ACTIVE_BOX_BUTTON_COLOR= "slate gray"
+
 
 class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
@@ -42,20 +50,19 @@ class MagicDashboard(tk.Frame):
 
 
         logger.info("Entering MagicDashboard Initialize")
-        self.configure(background="gray25")
+        self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')
-        s.configure('time.Label', background='dark slate gray', foreground='peachpuff2', font=('arial', 30, 'bold'))
-        s.configure('dash.TButton', background='gray25', foreground='peachpuff2', borderwidth=0)
-        s.configure('dash1.TButton', background='dark slate gray', foreground='PeachPuff2')
-        s.map('dash.TButton', background=[('pressed', 'peachpuff'), ('active', '!disabled', 'gray44')],
-              foreground=[('pressed', 'peachpuff2'), ('active', 'peachpuff2')])
-        s.map('dash1.TButton', background=[('active', '!disabled', 'dark olive green'), ('pressed', 'PeachPuff2')],
-             foreground=[('pressed', 'PeachPuff2'), ('active', 'PeachPuff2')])
+        s.configure('time.Label', background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
+        s.configure("dash.TButton",background=BACKGROUND_COLOR,foreground=FOREGROUND_COLOR)
+        s.map('dash.TButton', background=[('pressed', FOREGROUND_COLOR), ('active', '!disabled', ACTIVE_BUTTON_COLOR)],
+              foreground=[('pressed', FOREGROUND_COLOR), ('active', FOREGROUND_COLOR)])
+        s.map('dash1.TButton', background=[('active', '!disabled', ACTIVE_BUTTON_COLOR), ('pressed', FOREGROUND_COLOR)],
+             foreground=[('pressed', FOREGROUND_COLOR), ('active', FOREGROUND_COLOR)])
 
-        s.configure('dash.TLabelframe', background='gray25',bordercolor='peachpuff2',borderwidth=3)
+        s.configure('dash.TLabelframe', background=BACKGROUND_COLOR,bordercolor=FOREGROUND_COLOR,borderwidth=3)
         s.configure('dash.TLabelframe.Label', font=('courier', 14, 'bold', 'italic'))
-        s.configure('dash.TLabelframe.Label', foreground='peachpuff2',background="gray25")
+        s.configure('dash.TLabelframe.Label', foreground=FOREGROUND_COLOR,background=BACKGROUND_COLOR)
         s.configure('dashheader.Label', background='steel blue', foreground='snow', font=('courier', 12, 'bold','italic'))
         s.configure('dashdata.Label', background='steel blue', foreground='snow', font=('courier', 50, 'bold'))
         s.configure('dash2header.Label', background='gray16', foreground='snow',
@@ -63,22 +70,171 @@ class MagicDashboard(tk.Frame):
         s.configure('dash3data.Label', background='steel blue', foreground='snow',
                     font=('courier', 20, 'bold', 'italic'))
         s.configure('dash2data.Label', background='gray16', foreground='snow', font=('courier', 40, 'bold'))
-        s.configure('dash4header.Label', background='gray25', foreground='snow',
+        s.configure('dash4header.Label', background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR,
                     font=('comic sans', 10, 'bold', 'italic'))
+        s.configure('dashboxheader.Label', background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR,
+                    font=('comic sans', 10, 'bold'))
+        s.configure('dashboxbutton.TButton', background=BOX_BUTTON_BACKGROUND_COLOR, foreground=BOX_BUTTON_FOREGROUND_COLOR,
+                    font=('comic sans', 8, 'bold'))
+        s.map('dashboxbutton.TButton', background=[('active', '!disabled', ACTIVE_BOX_BUTTON_COLOR), ('pressed', BOX_BUTTON_FOREGROUND_COLOR)],
+              foreground=[('pressed', BOX_BUTTON_FOREGROUND_COLOR), ('active', BOX_BUTTON_FOREGROUND_COLOR)])
+
+
 
 
 
         self.image_logo = PhotoImage(file="../images/logo_bg.png")
         self.logo_button = ttk.Button(self, text="", image=self.image_logo,
-                                       style="dash.TButton",width=10,
+                                       style="dash.TButton",width=5,
                                        command=self.launch_website)
 
 
-        self.launcher_display()
 
-        self.info_display()
+        self.Lessons_Frame_Create()
+        self.Participants_Frame_Create()
 
-        self.logo_button.grid(row=0, column=0, sticky=tk.N)
+        #self.launcher_display()
+
+        #self.info_display()
+
+        self.logo_button.grid(row=0, column=0,columnspan=2, sticky=tk.N)
+    def Participants_Frame_Create(self):
+        self.participants_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+                                            highlightbackground="gray30", highlightcolor="gray30", background="gray18")
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+
+        self.participants_group_frame.grid(row=1, column=1, padx=10)
+        self.image_participants = PhotoImage(file="../images/business-class.png")
+        self.participants_header_label = tk.Label(self.participants_group_frame, compound=tk.LEFT, image=self.image_participants,
+                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
+                                             text=" Participants", font=("Helvetica", 16, 'bold'),
+                                             background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
+        self.participants_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
+        self.participants_names_scroll_frame = tk.Frame(self.participants_group_frame, width=200, height=200,
+                                                   background="gray18")
+        self.participants_names_scroll_frame.rowconfigure(0, weight=1)
+        self.participants_names_scroll_frame.columnconfigure(0, weight=1)
+        self.participants_names_scroll_frame.grid(row=1, columnspan=3, sticky=tk.NSEW)
+        self.participant_list = DataCaptureDashboard.get_participants()
+        participants_index = 0
+        self.show_participants_names(self.participants_names_scroll_frame, self.participant_list, participants_index)
+        self.class_button = ttk.Button(self.participants_group_frame, text="Maintain",
+                                        width=8,
+                                        command=self.launch_class_data, style="dashboxbutton.TButton")
+        self.bday_button = ttk.Button(self.participants_group_frame, text="Play",
+                                      width=8,
+                                      command=self.bday_play, style="dashboxbutton.TButton")
+
+        self.class_label = tk.Label(self.participants_group_frame,
+                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
+                                     text="Classroom Information",
+                                     font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                     foreground=BOX_FOREGROUND_COLOR)
+        self.bday_label = tk.Label(self.participants_group_frame,
+                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
+                                   text="Play B'Day Song",
+                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   foreground=BOX_FOREGROUND_COLOR)
+
+        self.class_label.grid(row=2, column=1, pady=5)
+        self.class_button.grid(row=2, column=2, pady=5)
+        self.bday_label.grid(row=3, column=1, pady=5)
+        self.bday_button.grid(row=3, column=2, pady=5)
+
+
+    def Lessons_Frame_Create(self):
+        self.lessons_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+                                            highlightbackground="gray30", highlightcolor="gray30", background="gray18")
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+
+        self.lessons_group_frame.grid(row=1, column=0, padx=10)
+        self.image_lessons = PhotoImage(file="../images/books.png")
+        self.lessons_header_label = tk.Label(self.lessons_group_frame, compound=tk.LEFT, image=self.image_lessons,
+                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
+                                             text=" Lessons", font=("Helvetica", 16, 'bold'),
+                                             background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
+        self.lessons_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
+        self.lessons_image_scroll_frame = tk.Frame(self.lessons_group_frame, width=200, height=200,
+                                                   background="gray18")
+        self.lessons_image_scroll_frame.rowconfigure(0, weight=1)
+        self.lessons_image_scroll_frame.columnconfigure(0, weight=1)
+        self.lessons_image_scroll_frame.grid(row=1, columnspan=3, sticky=tk.NSEW)
+        self.image_list = DataCaptureDashboard.get_title_images()
+        title_image_index = 0
+        self.image_display_scroll(self.lessons_image_scroll_frame, self.image_list, title_image_index)
+        self.create_button = ttk.Button(self.lessons_group_frame, text="Create",
+                                        width=6,
+                                        command=self.create_lesson, style="dashboxbutton.TButton")
+        self.edit_button = ttk.Button(self.lessons_group_frame, text="Edit",
+                                      width=6,
+                                      command=self.launch_lesson_edit, style="dashboxbutton.TButton")
+        self.view_button = ttk.Button(self.lessons_group_frame, text="View",
+                                      width=6,
+                                      command=self.lessons_list, style="dashboxbutton.TButton")
+        self.create_label = tk.Label(self.lessons_group_frame,
+                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
+                                     text="Create a New Lesson",
+                                     font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                     foreground=BOX_FOREGROUND_COLOR)
+        self.edit_label = tk.Label(self.lessons_group_frame,
+                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
+                                   text="Edit your Lessons",
+                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   foreground=BOX_FOREGROUND_COLOR)
+        self.lessons_label = tk.Label(self.lessons_group_frame,
+                                      borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
+                                      text="List all Lessons",
+                                      font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                      foreground=BOX_FOREGROUND_COLOR)
+        self.create_label.grid(row=2, column=1, pady=5)
+        self.create_button.grid(row=2, column=2, pady=5)
+        self.edit_label.grid(row=3, column=1, pady=5)
+        self.edit_button.grid(row=3, column=2, pady=5)
+        self.lessons_label.grid(row=4, column=1, pady=5)
+        self.view_button.grid(row=4, column=2, pady=5)
+
+    def show_participants_names(self, frame,list, n_index):
+
+        if len(list) == 0:
+            return
+        if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
+            self.participants_names_display.grid_forget()
+        self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=25,
+                                             font=("Helvetica", 16, 'bold'),
+                                             background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
+        self.participants_names_display.grid(row=0, column=0)
+        if (n_index == len(list)-1):
+            n_index = 0
+        else:
+           n_index += 1
+
+        self.after(5000, self.show_participants_names, frame, list, n_index)
+
+
+
+    def image_display_scroll(self,frame,list,index):
+        lesson_folder = "Lesson"+str(list[index][0])
+        image_root = DataCaptureDashboard.lesson_root+os.path.sep+lesson_folder+os.path.sep+"images"
+        image_file = image_root+os.path.sep+list[index][1]
+        try:
+            image_display = Image.open(image_file)
+            image_display = image_display.resize((150,150),Image.ANTIALIAS)
+            image_frame = ImageTk.PhotoImage(image_display)
+            self.image_resized_lessons_list = []
+            self.image_resized_lessons_list.append(image_frame)
+            self.image_display_lessons = ttk.Label(frame,image=image_frame)
+            self.image_display_lessons.grid(row=0,column=0)
+        except:
+            logger.info("Image could not be found or opened")
+        if index == len(list) - 1:
+            index =0
+        else:
+            index += 1
+        self.after(5000,self.image_display_scroll,frame,list,index)
 
     def launch_content(self):
         webbrowser.open_new_tab("https://www.dropbox.com/home/Learning%20Room")
@@ -310,14 +466,14 @@ class MagicDashboard(tk.Frame):
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
-        launch_player.geometry("1300x700+20+20")
+        launch_player.geometry("1400x800+20+20")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
-        launch_notes.geometry("200x200+20+20")
+        launch_notes.geometry("700x300+20+20")
          # if os.name == "nt":
          #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
          #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
@@ -350,7 +506,7 @@ class MagicDashboard(tk.Frame):
 
 if __name__== "__main__":
     dashboard_app = tk.Tk()
-    dashboard_app.configure(background="gray25")
+    dashboard_app.configure(background="gray18")
     dashboard_app.title("Learning Room Dashboard")
     screen_width = dashboard_app.winfo_screenwidth()
     screen_height = dashboard_app.winfo_screenheight()
@@ -359,8 +515,9 @@ if __name__== "__main__":
     screen_half_height = int(dashboard_app.winfo_screenheight())
     dashboard_app.geometry("1300x700+20+20")
     frame = MagicDashboard(dashboard_app)
+
     #dashboard_app.rowconfigure(0,weight=1)
     dashboard_app.columnconfigure(0, weight=1)
-    frame.grid(row=0,column=0)
+    frame.grid(row=0,column=0,sticky=tk.EW)
     dashboard_app.mainloop()
 

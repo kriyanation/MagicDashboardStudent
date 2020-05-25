@@ -10,6 +10,7 @@ logger = logging.getLogger("MagicLogger")
 
 file_root = os.path.abspath(os.getcwd())
 db = file_root+os.path.sep+".."+os.path.sep+"MagicRoom.db"
+lesson_root = file_root+os.path.sep+".."+os.path.sep+"Lessons"
 
 
 
@@ -100,5 +101,33 @@ def get_badge_1_count():
         logger.info("Exception in retrieving lessons information")
         logger.info(traceback.print_exc())
 
+def get_title_images():
+    try:
+        print (db)
+        connection = sqlite3.connect(db)
+        cur = connection.cursor()
+        sql = "select Lesson_ID, Title_Image from Magic_Science_Lessons"
+        cur.execute(sql)
+        image_list = cur.fetchall()
+        connection.commit()
+        connection.close()
+        return image_list
+    except:
+        logger.info("Exception in retrieving image list information")
+        logger.exception("Exception in Image List Retrieval")
 
 
+def get_participants():
+    try:
+        print(db)
+        connection = sqlite3.connect(db)
+        cur = connection.cursor()
+        sql = "select Name from Magic_Class_Info"
+        cur.execute(sql)
+        participant_list = cur.fetchall()
+        connection.commit()
+        connection.close()
+        return participant_list
+    except:
+        logger.info("Exception in retrieving participant list information")
+        logger.exception("Exception in participant List Retrieval")
