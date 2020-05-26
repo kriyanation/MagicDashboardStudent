@@ -131,3 +131,14 @@ def get_participants():
     except:
         logger.info("Exception in retrieving participant list information")
         logger.exception("Exception in participant List Retrieval")
+
+def get_flash_images():
+
+    connection = sqlite3.connect(db)
+    cur = connection.cursor()
+    sql = "select Lesson_ID,Factual_Image1 from Magic_Science_Lessons"
+    cur.execute(sql)
+    images = cur.fetchall()
+    connection.commit()
+    connection.close()
+    return images
