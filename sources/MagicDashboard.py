@@ -53,6 +53,11 @@ class MagicDashboard(tk.Frame):
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')
+        s.configure('Blue.TButton', background='white', foreground='royalblue4', font=('helvetica', 12, 'bold'),
+                    bordercolor="royalblue4")
+        s.map('Blue.TButton', background=[('active', '!disabled', 'cyan'), ('pressed', 'white')],
+              foreground=[('pressed', 'royalblue4'), ('active', 'royalblue4')])
+
         s.configure('time.Label', background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
         s.configure("dash.TButton",background=BACKGROUND_COLOR,foreground=FOREGROUND_COLOR)
         s.map('dash.TButton', background=[('pressed', FOREGROUND_COLOR), ('active', '!disabled', ACTIVE_BUTTON_COLOR)],
@@ -352,10 +357,10 @@ class MagicDashboard(tk.Frame):
         win.wm_title("Happy B'Day "+self.name)
         win.wm_geometry('500x400+500+200')
         win.resizable(False, False)
-        win.configure(background='dark slate gray')
+        win.configure(background='steelblue4')
         win.attributes('-topmost', 'true')
         self.bday_label = ttk.Label(win, text="Happy B'Day "+self.name,
-                                            style="time.Label")
+                                            font=("helvetica", 18, 'bold'), foreground='white',background="steelblue4")
         self.bday_wish = tk.PhotoImage(file='../images/bday_wish.png')
         self.bday_image = ttk.Label(win, image=self.bday_wish)
 
@@ -370,7 +375,7 @@ class MagicDashboard(tk.Frame):
             opener = "open" if sys.platform == "darwin" else "xdg-open"
             subprocess.call([opener, file_song_path])
 
-        b = ttk.Button(win, text="Close", style='dash1.TButton', command=win.destroy)
+        b = ttk.Button(win, text="Close", style='Blue.TButton', command=win.destroy)
         b.pack()
 
     def launcher_display(self):
