@@ -94,7 +94,7 @@ class MagicDashboard(tk.Frame):
 
     def Participants_Frame_Create(self):
         logger.info("Entering Participants Frame")
-        self.participants_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+        self.participants_group_frame = tk.Frame(self, padx=10, pady=10, highlightthickness=3,
                                             highlightbackground="gray30", highlightcolor="gray30", background="gray18")
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
@@ -141,7 +141,7 @@ class MagicDashboard(tk.Frame):
 
     def Lessons_Frame_Create(self):
         logger.info("Entering Lessons Frame Create")
-        self.lessons_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+        self.lessons_group_frame = tk.Frame(self, padx=10, pady=10, highlightthickness=3,
                                             highlightbackground="gray30", highlightcolor="gray30", background="gray18")
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
@@ -349,7 +349,7 @@ class MagicDashboard(tk.Frame):
 
     def tools_frame_create(self):
         logger.info("Entering Tools Frame Create")
-        self.tools_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+        self.tools_group_frame = tk.Frame(self, padx=10, pady=10,highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
         self.rowconfigure(1, weight=1)
@@ -414,7 +414,7 @@ class MagicDashboard(tk.Frame):
 
     def flash_frame_create(self):
         logger.info("Entering Flash Card Frame Create")
-        self.flash_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+        self.flash_group_frame = tk.Frame(self, padx=10, pady=10,highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
         self.rowconfigure(1, weight=1)
@@ -464,7 +464,7 @@ class MagicDashboard(tk.Frame):
 
     def star_frame_create(self):
         logger.info("Entering Starts Frame Create")
-        self.star_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
+        self.star_group_frame = tk.Frame(self, padx=10, pady=10, highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
         self.rowconfigure(1, weight=1)
