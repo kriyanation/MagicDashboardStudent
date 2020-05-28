@@ -47,8 +47,6 @@ ACTIVE_BOX_BUTTON_COLOR= "slate gray"
 class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
         super().__init__(parent,*args,**kwargs)
-
-
         logger.info("Entering MagicDashboard Initialize")
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
@@ -83,30 +81,19 @@ class MagicDashboard(tk.Frame):
                     font=('comic sans', 8, 'bold'))
         s.map('dashboxbutton.TButton', background=[('active', '!disabled', ACTIVE_BOX_BUTTON_COLOR), ('pressed', BOX_BUTTON_FOREGROUND_COLOR)],
               foreground=[('pressed', BOX_BUTTON_FOREGROUND_COLOR), ('active', BOX_BUTTON_FOREGROUND_COLOR)])
-
-
-
-
-
         self.image_logo = PhotoImage(file="../images/logo_bg.png")
         self.logo_button = ttk.Button(self, text="", image=self.image_logo,
                                        style="dash.TButton",width=5,
                                        command=self.launch_website)
-
-
-
         self.Lessons_Frame_Create()
         self.Participants_Frame_Create()
         self.tools_frame_create()
         self.flash_frame_create()
         self.star_frame_create()
-
-        #self.launcher_display()
-
-        #self.info_display()
-
         self.logo_button.grid(row=0, column=0,columnspan=2, sticky=tk.N)
+
     def Participants_Frame_Create(self):
+        logger.info("Entering Participants Frame")
         self.participants_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
                                             highlightbackground="gray30", highlightcolor="gray30", background="gray18")
         self.rowconfigure(1, weight=1)
@@ -153,6 +140,7 @@ class MagicDashboard(tk.Frame):
 
 
     def Lessons_Frame_Create(self):
+        logger.info("Entering Lessons Frame Create")
         self.lessons_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
                                             highlightbackground="gray30", highlightcolor="gray30", background="gray18")
         self.rowconfigure(1, weight=1)
@@ -206,7 +194,7 @@ class MagicDashboard(tk.Frame):
         self.view_button.grid(row=4, column=2, pady=5)
 
     def show_participants_names(self, frame,list, n_index):
-
+        logger.info("Entering Show Participants Names")
         if len(list) == 0:
             return
         if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
@@ -225,6 +213,7 @@ class MagicDashboard(tk.Frame):
 
 
     def flash_image_display_scroll(self,frame,list,index):
+        logger.info("Entering Flash Image Display")
         lesson_folder = "Lesson"+str(list[index][0])
         image_root = DataCaptureDashboard.lesson_root+os.path.sep+lesson_folder+os.path.sep+"images"
         image_file = image_root+os.path.sep+list[index][1]
@@ -238,13 +227,15 @@ class MagicDashboard(tk.Frame):
             self.flash_display_lessons.grid(row=0,column=0)
         except:
             logger.info("Image could not be found or opened")
+            logger.exception("Image Could not be opened - Flashcards Dashboard")
         if index == len(list) - 1:
             index =0
         else:
             index += 1
-        self.after(5000,self.flash_image_display_scroll,frame,list,index)
+        self.after(10000,self.flash_image_display_scroll,frame,list,index)
 
     def lesson_image_display_scroll(self,frame,list,index):
+        logger.info("Entering Lesson Image Display Scroll")
         lesson_folder = "Lesson"+str(list[index][0])
         image_root = DataCaptureDashboard.lesson_root+os.path.sep+lesson_folder+os.path.sep+"images"
         image_file = image_root+os.path.sep+list[index][1]
@@ -258,11 +249,12 @@ class MagicDashboard(tk.Frame):
             self.image_display_lessons.grid(row=0,column=0)
         except:
             logger.info("Image could not be found or opened")
+            logger.exception("Lesson Image could not be opened")
         if index == len(list) - 1:
             index =0
         else:
             index += 1
-        self.after(5000,self.lesson_image_display_scroll,frame,list,index)
+        self.after(7000,self.lesson_image_display_scroll,frame,list,index)
 
     def launch_content(self):
         webbrowser.open_new_tab("https://www.dropbox.com/home/Learning%20Room")
@@ -270,84 +262,9 @@ class MagicDashboard(tk.Frame):
     def launch_website(self):
         webbrowser.open_new_tab("http://www.wondersky.in/")
 
-    def info_display(self):
-        lesson_count = DataCaptureDashboard.get_Lessons_count()
-        self.dashboard_info_labelframe = ttk.LabelFrame(self, text="Learning Info", style="dash.TLabelframe")
-        self.dashboard_info_labelframe.grid(row=2, column=0, pady=30)
-        self.lessons_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
-                                      highlightbackground='gray16', highlightthickness=3)
-        self.lessons_frame.tooltip = tooltip.ToolTip(self.lessons_frame, "Number of Lessons Created")
-        self.lessons_header_label = ttk.Label(self.lessons_frame, text=" Lessons ", style="dashheader.Label")
-        self.lessons_data_label = ttk.Label(self.lessons_frame, text=lesson_count[0],
-                                            style="dashdata.Label")
-        student_count = DataCaptureDashboard.get_participants_count()
-        self.lessons_frame.grid(row=0, column=0, sticky=tk.NW, padx=10, pady=10)
-        self.lessons_header_label.grid(row=0, column=0)
-        self.lessons_data_label.grid(row=1, column=0, pady=5)
-        self.participants_frame = tk.Frame(self.dashboard_info_labelframe, background="gray16",
-                                           highlightbackground='aquamarine', highlightthickness=3)
-        self.participants_frame.tooltip = tooltip.ToolTip(self.participants_frame, "Current Number of Participants")
-
-        self.participants_header_label = ttk.Label(self.participants_frame, text=" Participants ",
-                                                   style="dash2header.Label")
-        self.participants_data_label = ttk.Label(self.participants_frame, text=student_count[0],
-                                                 style="dash2data.Label")
-
-        self.participants_frame.grid(row=0, column=1, sticky=tk.NW, padx=40, pady=10)
-        self.participants_header_label.grid(row=0, column=0)
-        self.participants_data_label.grid(row=1, column=0, pady=5)
-
-
-        self.leader_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
-                                     highlightbackground='gray16', highlightthickness=3,width=150,height=60)
-        self.leader_frame.tooltip = tooltip.ToolTip(self.leader_frame, "Participants with Level 1 Badge")
-
-        self.leader_header_label = ttk.Label(self.leader_frame, text=" Stars ",
-                                             style="dashheader.Label")
-        self.leader_data_label = ttk.Label(self.leader_frame,wraplength=200,
-                                           style="dash3data.Label")
-        self.leader_frame.grid(row=0, column=2, sticky=tk.NE, padx=40, pady=10,ipadx=20,ipady=20)
-        self.leader_frame.grid_propagate(False)
-        self.leader_header_label.grid(row=0, column=0,sticky=tk.EW,padx=50)
-        self.leader_data_label.grid(row=1, column=0, pady=10)
-        names = DataCaptureDashboard.get_badge_1_count()
-        n_index = 0
-        self.show_names(names, n_index)
-        flash_card_count = lesson_count[0]*3
-        self.flash_frame = tk.Frame(self.dashboard_info_labelframe, background="steel blue",
-                                    highlightbackground='gray16', highlightthickness=3)
-        self.flash_frame.tooltip = tooltip.ToolTip(self.flash_frame, "Number of Flashcards to Play")
-
-        self.flash_header_label = ttk.Label(self.flash_frame, text=" Flashcards ",
-                                            style="dashheader.Label")
-        self.flash_data_label = ttk.Label(self.flash_frame, text=flash_card_count,
-                                          style="dashdata.Label")
-        self.flash_frame.grid(row=0, column=4, sticky=tk.NE, padx=40, pady=8)
-        self.flash_header_label.grid(row=0, column=0)
-        self.flash_data_label.grid(row=1, column=0)
-
-        no_steps = DataCaptureDashboard.get_skill_steps_count()
-        self.skill_frame = tk.Frame(self.dashboard_info_labelframe, background="gray16",
-                                    highlightbackground='aquamarine', highlightthickness=3)
-        self.skill_frame.tooltip = tooltip.ToolTip(self.skill_frame, "Number of steps used in the Skill Board")
-
-        self.skill_header_label = ttk.Label(self.skill_frame, text=" Skill Steps ",
-                                            style="dash2header.Label")
-        self.skill_data_label = ttk.Label(self.skill_frame, text=no_steps[0],
-                                          style="dash2data.Label")
-        self.skill_frame.grid(row=0, column=3, padx=40, sticky=tk.NE, pady=10)
-        self.skill_header_label.grid(row=0, column=0)
-        self.skill_data_label.grid(row=1, column=0)
-        self.badge_image_bday = tk.PhotoImage(file='../images/BDay.png')
-        self.bday_button = ttk.Button(self.dashboard_info_labelframe, image=self.badge_image_bday,
-                                      style="dash.TButton",
-                                      command=self.bday_play)
-        self.bday_button.tooltip = tooltip.ToolTip(self.bday_button, "Wish Happy B'Day to your student")
-
-        self.bday_button.grid(row=0, column=5, padx=40, sticky=tk.NE, pady=3)
 
     def bday_play(self):
-
+        logger.info("Entering BDay play song")
         self.name = simpledialog.askstring("B'Day Student", "Name",
                                         parent=self)
         if self.name is None:
@@ -355,7 +272,7 @@ class MagicDashboard(tk.Frame):
 
         win = tk.Toplevel()
         win.wm_title("Happy B'Day "+self.name)
-        win.wm_geometry('500x400+500+200')
+        win.wm_geometry('500x400+600+300')
         win.resizable(False, False)
         win.configure(background='steelblue4')
         win.attributes('-topmost', 'true')
@@ -378,80 +295,9 @@ class MagicDashboard(tk.Frame):
         b = ttk.Button(win, text="Close", style='Blue.TButton', command=win.destroy)
         b.pack()
 
-    def launcher_display(self):
-        self.dashboard_launcher_labelframe = ttk.LabelFrame(self, text="Launcher", style="dash.TLabelframe")
-        self.dashboard_launcher_labelframe.grid(row=1, column=0)
-        self.image_timer = PhotoImage(file="../images/Timer.png")
-        self.image_edit = PhotoImage(file="../images/edit_lesson.png")
-        self.image_flash = PhotoImage(file="../images/flashcards.png")
-        self.image_print_assessment = PhotoImage(file="../images/print_assessment.png")
-        self.image_class = PhotoImage(file="../images/class_data.png")
-        self.image_player = PhotoImage(file="../images/player_button.png")
-        self.lesson_notes = PhotoImage(file="../images/notes.png")
-        self.list_lessons = PhotoImage(file="../images/List_Lessons.png")
-        self.image_create = PhotoImage(file="../images/create_lesson.png")
-        self.timer_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_timer,
-                                       style="dash.TButton",
-                                       command=self.launch_timer)
-        self.image_content = PhotoImage(file="../images/content.png")
-        self.content_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_content,
-                                       style="dash.TButton",
-                                       command=self.launch_content)
-        self.timer_button.tooltip = tooltip.ToolTip(self.timer_button, "Launch Timer Screen")
-
-        self.edit_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_edit,
-                                      style="dash.TButton",
-                                      command=self.launch_lesson_edit)
-        self.edit_button.tooltip = tooltip.ToolTip(self.edit_button, "Edit Existing Lesson")
-
-        self.flash_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_flash,
-                                       style="dash.TButton",
-                                       command=self.launch_flashcard)
-        self.flash_button.tooltip = tooltip.ToolTip(self.flash_button, "Play a game of Flash Cards")
-
-        self.print_assessment_button = ttk.Button(self.dashboard_launcher_labelframe, text="",
-                                                  image=self.image_print_assessment,
-                                                  style="dash.TButton",
-                                                  command=self.launch_assessment_pdf)
-        self.print_assessment_button.tooltip = tooltip.ToolTip(self.print_assessment_button, "Print PDF of Assessment Questions")
-
-        self.class_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_class,
-                                       style="dash.TButton",
-                                       command=self.launch_class_data)
-        self.class_button.tooltip = tooltip.ToolTip(self.class_button, "Maintain Classroom Information")
-
-        self.player_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_player,
-                                        style="dash.TButton",
-                                        command=self.launch_player)
-        self.player_button.tooltip = tooltip.ToolTip(self.player_button, "Conduct the Interactive Session for your Lesson")
-
-        self.notes_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.lesson_notes,
-                                       style="dash.TButton",
-                                       command=self.launch_pdf_notes)
-        self.notes_button.tooltip = tooltip.ToolTip(self.notes_button, "Print Notes for your Lesson")
-
-        self.lessons_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.list_lessons,
-                                         style="dash.TButton",
-                                         command=self.lessons_list)
-        self.lessons_button.tooltip = tooltip.ToolTip(self.lessons_button, "View Lessons Created")
-
-        self.create_button = ttk.Button(self.dashboard_launcher_labelframe, text="", image=self.image_create,
-                                        style="dash.TButton",
-                                        command=self.create_lesson)
-        self.create_button.tooltip = tooltip.ToolTip(self.create_button, "Create a new Lesson")
-        self.timer_button.grid(row=0, column=0, padx=20, sticky=tk.NW)
-        self.edit_button.grid(row=0, column=1, padx=20, sticky=tk.NW)
-        self.print_assessment_button.grid(row=0, column=4, sticky=tk.NE)
-        self.flash_button.grid(row=0, column=3, sticky=tk.NE)
-        self.class_button.grid(row=1, column=4, sticky=tk.SE)
-        self.notes_button.grid(row=1, column=3, padx=50, sticky=tk.SE)
-        self.lessons_button.grid(row=1, column=0, sticky=tk.SW)
-        self.create_button.grid(row=1, column=1, padx=20, sticky=tk.SW)
-        self.player_button.grid(row=0, column=2, padx=20, sticky=tk.NE)
-        self.content_button.grid(row=1, column=2, sticky=tk.SW,padx=20)
 
     def show_names(self,frame, names,n_index):
-        #try:
+            logger.info("Entering show names for starts")
             if(n_index == len(names)):
                 n_index = 0
             if len(names) == 0:
@@ -460,81 +306,49 @@ class MagicDashboard(tk.Frame):
                                              font=("Helvetica", 16, 'bold'),
                                              background="gray16", foreground=FOREGROUND_COLOR)
             self.leader_data_label.grid(row=1,column=0)
-            self.after(5000,self.show_names,frame,names,n_index+1)
-        #except:
-         #   logger.info("Exception in retrieving lessons information")
-          #  logger.info(traceback.print_exc()),
+            self.after(6000,self.show_names,frame,names,n_index+1)
 
     def launch_lesson_edit(self):
 
         launch_edit = MagicEditWizard.MagicEditWizard(self)
         launch_edit.geometry("1300x700+20+20")
-        #if os.name == "nt":
-         #   print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
-         #   #os.system(os.getcwd() + os.path.sep + "app" + os.path.sep + "lesson_edit.exe")
-         #   subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Edit"+os.path.sep+"Lesson_Edit.exe"))
 
     def launch_flashcard(self):
         launch_flashcard = FlashCard.MagicFlashApplication(self)
-        launch_flashcard.geometry("1300x700+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Revise"+os.path.sep+"Lesson_Revise.exe"))
+        launch_flashcard.geometry("1300x700+220+20")
 
     def launch_assessment_pdf(self):
         launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
-        launch_assessment.geometry("700x300+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Assess"+os.path.sep+"Lesson_Assess.exe"))
+        launch_assessment.geometry("700x300+300+300")
 
     def launch_class_data(self):
         launch_class = magic_classroom_info.MagicClassRoomData(self)
-        launch_class.geometry("1300x700+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Class_Data"+os.path.sep+"Lesson_Class_Data.exe"))
+        launch_class.geometry("1300x750+20+20")
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
-        launch_player.geometry("1400x800+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Play"+os.path.sep+"Lesson_Play.exe"))
+        launch_player.geometry("1400x800+220+20")
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
-        launch_notes.geometry("700x300+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+        launch_notes.geometry("700x300+300+300")
 
     def lessons_list(self):
         launch_lessonlist = Lesson_List_Display.MagicLessonList(self)
-        launch_lessonlist.geometry("1000x700+20+20")
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_List"+os.path.sep+"Lesson_List.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_PDF_Notes"+os.path.sep+"Lesson_PDF_Notes.exe"))
+        launch_lessonlist.geometry("1200x800+20+20")
 
     def create_lesson(self):
         launch_Create = create_explainer_content.MagicWizard(self)
         launch_Create.geometry("1300x700+20+20")
-
-
-         # if os.name == "nt":
-         #    print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
-         #    subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Create"+os.path.sep+"Lesson_Create.exe"))
 
     def launch_timer(self):
         launch_timer = Timer_Display.TimerDisplay(self)
         launch_timer.resizable(width=False,height=False)
         launch_timer.attributes("-topmost", True)
         launch_timer.geometry("240x250+20+20")
-        #if os.name == "nt":
-         #   print(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
-          #  subprocess.Popen(os.path.abspath(os.getcwd() + os.path.sep + ".." + os.path.sep + "Lesson_Timer"+os.path.sep+"Lesson_Timer.exe"))
 
     def tools_frame_create(self):
+        logger.info("Entering Tools Frame Create")
         self.tools_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
@@ -599,6 +413,7 @@ class MagicDashboard(tk.Frame):
         self.print_assessment_button.grid(row=5, column=1, pady=5)
 
     def flash_frame_create(self):
+        logger.info("Entering Flash Card Frame Create")
         self.flash_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
@@ -640,9 +455,6 @@ class MagicDashboard(tk.Frame):
                                    text="A game of Flashcards",
                                    font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
-
-
-
         self.play_label.grid(row=2, column=0, pady=5)
         self.play_button.grid(row=2, column=1, pady=5)
 
@@ -651,6 +463,7 @@ class MagicDashboard(tk.Frame):
 
 
     def star_frame_create(self):
+        logger.info("Entering Starts Frame Create")
         self.star_group_frame = tk.Frame(self, padx=10, pady=10, width=300, height=300, highlightthickness=3,
                                                  highlightbackground="gray30", highlightcolor="gray30",
                                                  background="gray18")
@@ -691,7 +504,7 @@ if __name__== "__main__":
 
     screen_half_width = int(dashboard_app.winfo_screenwidth())
     screen_half_height = int(dashboard_app.winfo_screenheight())
-    dashboard_app.geometry("1300x700+20+20")
+    dashboard_app.geometry("1300x850+200+20")
     frame = MagicDashboard(dashboard_app)
 
     #dashboard_app.rowconfigure(0,weight=1)
