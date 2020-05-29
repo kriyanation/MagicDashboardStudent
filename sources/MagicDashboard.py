@@ -202,7 +202,7 @@ class MagicDashboard(tk.Frame):
         if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
             self.participants_names_display.grid_forget()
         self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=20,
-                                             font=("Helvetica", 14, 'bold'),
+                                             font=("Helvetica", 16, 'bold'),
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
         self.participants_names_display.grid(row=0, column=0)
         if (n_index == len(list)-1):
