@@ -219,7 +219,7 @@ class MagicDashboard(tk.Frame):
         image_file = image_root+os.path.sep+list[index][1]
         try:
             image_display = Image.open(image_file)
-            image_display = image_display.resize((150,150),Image.ANTIALIAS)
+            image_display = image_display.resize((100,100),Image.ANTIALIAS)
             image_frame = ImageTk.PhotoImage(image_display)
             self.flash_resized_lessons_list = []
             self.flash_resized_lessons_list.append(image_frame)
@@ -241,7 +241,7 @@ class MagicDashboard(tk.Frame):
         image_file = image_root+os.path.sep+list[index][1]
         try:
             image_display = Image.open(image_file)
-            image_display = image_display.resize((150,150),Image.ANTIALIAS)
+            image_display = image_display.resize((100,100),Image.ANTIALIAS)
             image_frame = ImageTk.PhotoImage(image_display)
             self.image_resized_lessons_list = []
             self.image_resized_lessons_list.append(image_frame)
@@ -315,7 +315,7 @@ class MagicDashboard(tk.Frame):
 
     def launch_flashcard(self):
         launch_flashcard = FlashCard.MagicFlashApplication(self)
-        launch_flashcard.geometry("1300x700+220+20")
+        launch_flashcard.geometry("1300x700+120+20")
 
     def launch_assessment_pdf(self):
         launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
@@ -327,7 +327,7 @@ class MagicDashboard(tk.Frame):
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
-        launch_player.geometry("1400x800+220+20")
+        launch_player.geometry("1400x800+120+20")
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
