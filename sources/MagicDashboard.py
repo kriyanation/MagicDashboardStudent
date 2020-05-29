@@ -100,10 +100,10 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.participants_group_frame.grid(row=1, column=1, padx=10)
+        self.participants_group_frame.grid(row=2, column=0, pady=10,padx=10,sticky=tk.N)
         self.image_participants = PhotoImage(file="../images/business-class.png")
         self.participants_header_label = tk.Label(self.participants_group_frame, compound=tk.LEFT, image=self.image_participants,
-                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
+                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W,
                                              text=" Participants", font=("Helvetica", 16, 'bold'),
                                              background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.participants_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
@@ -122,14 +122,15 @@ class MagicDashboard(tk.Frame):
                                       width=8,
                                       command=self.bday_play, style="dashboxbutton.TButton")
 
+
         self.class_label = tk.Label(self.participants_group_frame,
-                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
-                                     text="Classroom Information",
+                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
+                                     text="Classroom Info",
                                      font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
                                      foreground=BOX_FOREGROUND_COLOR)
         self.bday_label = tk.Label(self.participants_group_frame,
-                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
-                                   text="Play B'Day Song",
+                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
+                                   text="B'Day Song",
                                    font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
 
@@ -137,6 +138,7 @@ class MagicDashboard(tk.Frame):
         self.class_button.grid(row=2, column=2, pady=5)
         self.bday_label.grid(row=3, column=1, pady=5)
         self.bday_button.grid(row=3, column=2, pady=5)
+      
 
 
     def Lessons_Frame_Create(self):
@@ -147,7 +149,7 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.lessons_group_frame.grid(row=1, column=0,rowspan=2, padx=10,sticky=tk.N)
+        self.lessons_group_frame.grid(row=1, column=0, padx=10,sticky=tk.N)
         self.image_lessons = PhotoImage(file="../images/books.png")
         self.lessons_header_label = tk.Label(self.lessons_group_frame, compound=tk.LEFT, image=self.image_lessons,
                                              borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
@@ -199,7 +201,7 @@ class MagicDashboard(tk.Frame):
             return
         if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
             self.participants_names_display.grid_forget()
-        self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=25,
+        self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=20,
                                              font=("Helvetica", 16, 'bold'),
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
         self.participants_names_display.grid(row=0, column=0)
@@ -303,7 +305,7 @@ class MagicDashboard(tk.Frame):
             if len(names) == 0:
                 return
             self.leader_data_label = tk.Label(frame,text=names[n_index][0],borderwidth=3, highlightcolor="gray16", width=25,
-                                             font=("Helvetica", 16, 'bold'),
+                                             font=("Helvetica", 12, 'bold'),
                                              background="gray16", foreground=FOREGROUND_COLOR)
             self.leader_data_label.grid(row=1,column=0)
             self.after(6000,self.show_names,frame,names,n_index+1)
@@ -356,7 +358,7 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.tools_group_frame.grid(row=2, column=1, padx=10,pady = 10)
+        self.tools_group_frame.grid(row=2, column=1, padx=10,pady = 10,sticky=tk.N)
         self.image_tools = PhotoImage(file="../images/tools.png")
         self.tools_header_label = tk.Label(self.tools_group_frame, compound=tk.LEFT,
                                                   image=self.image_tools,
@@ -365,8 +367,8 @@ class MagicDashboard(tk.Frame):
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.tools_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
 
-        self.content_button = ttk.Button(self.tools_group_frame, text="Download",
-                                       width=9,
+        self.content_button = ttk.Button(self.tools_group_frame, text="Save",
+                                       width=8,
                                        command=self.launch_content, style="dashboxbutton.TButton")
         self.print_notes_button = ttk.Button(self.tools_group_frame, text="Notes",
                                       width=8,
@@ -374,20 +376,14 @@ class MagicDashboard(tk.Frame):
         self.print_assessment_button = ttk.Button(self.tools_group_frame, text="Assess",
                                              width=8,
                                              command=self.launch_assessment_pdf, style="dashboxbutton.TButton")
-        self.timer_button = ttk.Button(self.tools_group_frame, text="Timer",
-                                                  width=8,
-                                                  command=self.launch_timer, style="dashboxbutton.TButton")
+
 
         self.content_label = tk.Label(self.tools_group_frame,
                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                     text="Images and Videos",
                                     font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
                                     foreground=BOX_FOREGROUND_COLOR)
-        self.timer_label = tk.Label(self.tools_group_frame,
-                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
-                                   text="Launch Timer",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
-                                   foreground=BOX_FOREGROUND_COLOR)
+       
 
         self.notes_label = tk.Label(self.tools_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
@@ -403,8 +399,7 @@ class MagicDashboard(tk.Frame):
         self.content_label.grid(row=1, column=0, pady=5)
         self.content_button.grid(row=1, column=1, pady=5)
 
-        self.timer_label.grid(row=2, column=0, pady=5)
-        self.timer_button.grid(row=2, column=1, pady=5)
+
 
         self.notes_label.grid(row=4, column=0, pady=5)
         self.print_notes_button.grid(row=4, column=1, pady=5)
@@ -421,7 +416,7 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.flash_group_frame.grid(row=3, column=0, padx=10,pady = 0,sticky=tk.N)
+        self.flash_group_frame.grid(row=1, column=1, padx=10,pady = 0,sticky=tk.N)
         self.image_flash = PhotoImage(file="../images/chalkboard.png")
         self.flash_header_label = tk.Label(self.flash_group_frame, compound=tk.LEFT,
                                                   image=self.image_flash,
@@ -455,12 +450,22 @@ class MagicDashboard(tk.Frame):
                                    text="A game of Flashcards",
                                    font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
+        self.timer_button = ttk.Button(self.flash_group_frame, text="Timer",
+                                                  width=8,
+                                                  command=self.launch_timer, style="dashboxbutton.TButton")
+        self.timer_label = tk.Label(self.flash_group_frame,
+                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
+                                   text="Launch Timer",
+                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   foreground=BOX_FOREGROUND_COLOR)
         self.play_label.grid(row=2, column=0, pady=5)
         self.play_button.grid(row=2, column=1, pady=5)
 
         self.cards_label.grid(row=3, column=0, pady=5)
         self.cards_button.grid(row=3, column=1, pady=5)
 
+        self.timer_label.grid(row=4,column=0,pady=5)
+        self.timer_button.grid(row=4,column=1,pady=5)
 
     def star_frame_create(self):
         logger.info("Entering Starts Frame Create")
@@ -471,7 +476,7 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.star_group_frame.grid(row=3, column=1, padx=10,pady = 10)
+        self.star_group_frame.grid(row=3, column=0, padx=10,pady = 10,columnspan=3,sticky=tk.N)
         self.image_star = PhotoImage(file="../images/cup_icon.png")
         self.star_header_label = tk.Label(self.star_group_frame, compound=tk.LEFT,
                                                   image=self.image_star,
