@@ -51,7 +51,7 @@ class MagicDashboard(tk.Frame):
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')
-        s.configure('Blue.TButton', background='white', foreground='royalblue4', font=('helvetica', 12, 'bold'),
+        s.configure('Blue.TButton', background='white', foreground='royalblue4', font=('helvetica', 10, 'bold'),
                     bordercolor="royalblue4")
         s.map('Blue.TButton', background=[('active', '!disabled', 'cyan'), ('pressed', 'white')],
               foreground=[('pressed', 'royalblue4'), ('active', 'royalblue4')])
@@ -64,9 +64,9 @@ class MagicDashboard(tk.Frame):
              foreground=[('pressed', FOREGROUND_COLOR), ('active', FOREGROUND_COLOR)])
 
         s.configure('dash.TLabelframe', background=BACKGROUND_COLOR,bordercolor=FOREGROUND_COLOR,borderwidth=3)
-        s.configure('dash.TLabelframe.Label', font=('courier', 14, 'bold', 'italic'))
+        s.configure('dash.TLabelframe.Label', font=('courier', 12, 'bold', 'italic'))
         s.configure('dash.TLabelframe.Label', foreground=FOREGROUND_COLOR,background=BACKGROUND_COLOR)
-        s.configure('dashheader.Label', background='steel blue', foreground='snow', font=('courier', 12, 'bold','italic'))
+        s.configure('dashheader.Label', background='steel blue', foreground='snow', font=('courier', 10, 'bold','italic'))
         s.configure('dashdata.Label', background='steel blue', foreground='snow', font=('courier', 50, 'bold'))
         s.configure('dash2header.Label', background='gray16', foreground='snow',
                     font=('comic sans', 12, 'bold', 'italic'))
@@ -76,7 +76,7 @@ class MagicDashboard(tk.Frame):
         s.configure('dash4header.Label', background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR,
                     font=('comic sans', 10, 'bold', 'italic'))
         s.configure('dashboxheader.Label', background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR,
-                    font=('comic sans', 10, 'bold'))
+                    font=('comic sans', 8, 'bold'))
         s.configure('dashboxbutton.TButton', background=BOX_BUTTON_BACKGROUND_COLOR, foreground=BOX_BUTTON_FOREGROUND_COLOR,
                     font=('comic sans', 8, 'bold'))
         s.map('dashboxbutton.TButton', background=[('active', '!disabled', ACTIVE_BOX_BUTTON_COLOR), ('pressed', BOX_BUTTON_FOREGROUND_COLOR)],
@@ -104,7 +104,7 @@ class MagicDashboard(tk.Frame):
         self.image_participants = PhotoImage(file="../images/business-class.png")
         self.participants_header_label = tk.Label(self.participants_group_frame, compound=tk.LEFT, image=self.image_participants,
                                              borderwidth=3, highlightcolor="gray18", anchor=tk.W,
-                                             text=" Participants", font=("Helvetica", 16, 'bold'),
+                                             text=" Participants", font=("Helvetica", 14, 'bold'),
                                              background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.participants_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.participants_names_scroll_frame = tk.Frame(self.participants_group_frame, width=200, height=200,
@@ -126,12 +126,12 @@ class MagicDashboard(tk.Frame):
         self.class_label = tk.Label(self.participants_group_frame,
                                      borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
                                      text="Classroom Info",
-                                     font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                     font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                      foreground=BOX_FOREGROUND_COLOR)
         self.bday_label = tk.Label(self.participants_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
                                    text="B'Day Song",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
 
         self.class_label.grid(row=2, column=1, pady=5)
@@ -153,7 +153,7 @@ class MagicDashboard(tk.Frame):
         self.image_lessons = PhotoImage(file="../images/books.png")
         self.lessons_header_label = tk.Label(self.lessons_group_frame, compound=tk.LEFT, image=self.image_lessons,
                                              borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
-                                             text=" Lessons", font=("Helvetica", 16, 'bold'),
+                                             text=" Lessons", font=("Helvetica", 14, 'bold'),
                                              background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.lessons_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.lessons_image_scroll_frame = tk.Frame(self.lessons_group_frame, width=200, height=200,
@@ -176,17 +176,17 @@ class MagicDashboard(tk.Frame):
         self.create_label = tk.Label(self.lessons_group_frame,
                                      borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
                                      text="Create a New Lesson",
-                                     font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                     font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                      foreground=BOX_FOREGROUND_COLOR)
         self.edit_label = tk.Label(self.lessons_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
                                    text="Edit your Lessons",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
         self.lessons_label = tk.Label(self.lessons_group_frame,
                                       borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
                                       text="List all Lessons",
-                                      font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                      font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                       foreground=BOX_FOREGROUND_COLOR)
         self.create_label.grid(row=2, column=1, pady=5)
         self.create_button.grid(row=2, column=2, pady=5)
@@ -202,7 +202,7 @@ class MagicDashboard(tk.Frame):
         if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
             self.participants_names_display.grid_forget()
         self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=20,
-                                             font=("Helvetica", 16, 'bold'),
+                                             font=("Helvetica", 14, 'bold'),
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
         self.participants_names_display.grid(row=0, column=0)
         if (n_index == len(list)-1):
@@ -305,7 +305,7 @@ class MagicDashboard(tk.Frame):
             if len(names) == 0:
                 return
             self.leader_data_label = tk.Label(frame,text=names[n_index][0],borderwidth=3, highlightcolor="gray16", width=25,
-                                             font=("Helvetica", 12, 'bold'),
+                                             font=("Helvetica", 10, 'bold'),
                                              background="gray16", foreground=FOREGROUND_COLOR)
             self.leader_data_label.grid(row=1,column=0)
             self.after(6000,self.show_names,frame,names,n_index+1)
@@ -363,7 +363,7 @@ class MagicDashboard(tk.Frame):
         self.tools_header_label = tk.Label(self.tools_group_frame, compound=tk.LEFT,
                                                   image=self.image_tools,
                                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
-                                                  text=" Teacher Tools", font=("Helvetica", 16, 'bold'),
+                                                  text=" Teacher Tools", font=("Helvetica", 14, 'bold'),
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.tools_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
 
@@ -381,19 +381,19 @@ class MagicDashboard(tk.Frame):
         self.content_label = tk.Label(self.tools_group_frame,
                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                     text="Images and Videos",
-                                    font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                    font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                     foreground=BOX_FOREGROUND_COLOR)
        
 
         self.notes_label = tk.Label(self.tools_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                    text="Audio and Print Notes",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
 
         self.assessment_label = tk.Label(self.tools_group_frame, borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                    text="Assessments",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
 
         self.content_label.grid(row=1, column=0, pady=5)
@@ -421,7 +421,7 @@ class MagicDashboard(tk.Frame):
         self.flash_header_label = tk.Label(self.flash_group_frame, compound=tk.LEFT,
                                                   image=self.image_flash,
                                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
-                                                  text=" Interactions", font=("Helvetica", 16, 'bold'),
+                                                  text=" Interactions", font=("Helvetica", 14, 'bold'),
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.flash_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.flash_image_scroll_frame = tk.Frame(self.flash_group_frame, width=200, height=200,
@@ -443,12 +443,12 @@ class MagicDashboard(tk.Frame):
         self.play_label = tk.Label(self.flash_group_frame,
                                     borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                     text="Lesson for your Class",
-                                    font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                    font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                     foreground=BOX_FOREGROUND_COLOR)
         self.cards_label = tk.Label(self.flash_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                    text="A game of Flashcards",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
         self.timer_button = ttk.Button(self.flash_group_frame, text="Timer",
                                                   width=8,
@@ -456,7 +456,7 @@ class MagicDashboard(tk.Frame):
         self.timer_label = tk.Label(self.flash_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=25,
                                    text="Launch Timer",
-                                   font=("Helvetica", 12, 'bold'), background=BOX_BACKGROUND_COLOR,
+                                   font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
         self.play_label.grid(row=2, column=0, pady=5)
         self.play_button.grid(row=2, column=1, pady=5)
@@ -476,12 +476,12 @@ class MagicDashboard(tk.Frame):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
 
-        self.star_group_frame.grid(row=3, column=0, padx=10,pady = 10,columnspan=3,sticky=tk.N)
+        self.star_group_frame.grid(row=3, column=0,columnspan=3,sticky=tk.N)
         self.image_star = PhotoImage(file="../images/cup_icon.png")
         self.star_header_label = tk.Label(self.star_group_frame, compound=tk.LEFT,
                                                   image=self.image_star,
                                                   borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=30,
-                                                  text=" Celebrate", font=("Helvetica", 16, 'bold'),
+                                                  text=" Celebrate", font=("Helvetica", 14, 'bold'),
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.star_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.star_image_frame = tk.Frame(self.star_group_frame, width=200, height=200,
