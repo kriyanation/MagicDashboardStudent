@@ -26,6 +26,8 @@ import tooltip
 
 from PIL import Image, ImageTk
 
+from MagicTeacherUse import MagicTeacherUse
+
 handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
                               backupCount=3)
 form = logging.Formatter("%(asctime)s- %(name)s: %(message)s")
@@ -48,6 +50,7 @@ class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
         super().__init__(parent,*args,**kwargs)
         logger.info("Entering MagicDashboard Initialize")
+        MagicTeacherUse(self)
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')
