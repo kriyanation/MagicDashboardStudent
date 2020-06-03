@@ -50,7 +50,7 @@ class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
         super().__init__(parent,*args,**kwargs)
         logger.info("Entering MagicDashboard Initialize")
-        MagicTeacherUse(self)
+        teacher_check = MagicTeacherUse(self,parent)
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')

@@ -1,5 +1,7 @@
 import logging
 import sqlite3
+
+import bcrypt as bcrypt
 import sys
 
 from getmac import get_mac_address
@@ -7,12 +9,15 @@ from tkinter import messagebox, simpledialog
 
 logger = logging.getLogger("MagicLogger")
 class MagicTeacherUse():
-    def __init__(self,parent,*args,**kwargs):
+    def __init__(self,parent,gp,*args,**kwargs):
 
         status = self.get_activation_status()
         if status == 1:
-            pin_string = simpledialog.askstring("Enter PIN", "Please Enter the 6 Letter PIN")
+            gp.withdraw()
+            pin_string = simpledialog.askstring("Enter PIN", "Please Enter the 6 Letter PIN",parent=parent)
+
             self.validate_pin(pin_string)
+            gp.deiconify()
         else:
             self.validate_mac()
 
@@ -56,7 +61,7 @@ class MagicTeacherUse():
             cur.execute(sql)
             PIN = cur.fetchone()[0]
             cur.connection.close()
-            if pin == PIN:
+            if bcrypt.checkpw(pin.encode("utf-8"),PIN):
                 activated_status = 0
                 mac_address = get_mac_address()
                 connection = sqlite3.connect("MagicCheck")
