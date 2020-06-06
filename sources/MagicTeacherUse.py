@@ -39,6 +39,7 @@ class MagicTeacherUse():
         except sqlite3.OperationalError:
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("Activation Check met with an error")
+            sys.exit()
 
     def get_activation_status(self):
         try:
@@ -52,6 +53,7 @@ class MagicTeacherUse():
         except sqlite3.OperationalError:
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("Activation Check met with an error")
+            sys.exit()
 
     def validate_pin(self,pin):
         try:

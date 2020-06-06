@@ -33,7 +33,7 @@ handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
 form = logging.Formatter("%(asctime)s- %(name)s: %(message)s")
 logger = logging.getLogger("MagicLogger")
 handler.setFormatter(form)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 logger.addHandler(handler)
 
 BACKGROUND_COLOR = "gray18"
@@ -205,9 +205,9 @@ class MagicDashboard(tk.Frame):
         if (hasattr(self,"participants_names_display")) and self.participants_names_display is not None:
             self.participants_names_display.grid_forget()
         self.participants_names_display = tk.Label(frame, text=list[n_index][0],borderwidth=3, highlightcolor="gray18", width=20,
-                                             font=("Helvetica", 14, 'bold'),
+                                             font=("Helvetica", 14, 'bold'),height=1,
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
-        self.participants_names_display.grid(row=0, column=0)
+        self.participants_names_display.grid(row=0, column=0,sticky=tk.W)
         if (n_index == len(list)-1):
             n_index = 0
         else:
@@ -222,11 +222,11 @@ class MagicDashboard(tk.Frame):
         try:
             if hasattr(self,"flash_display_lessons"):
                 self.flash_display_lessons.grid_forget()
-            self.flash_display_lessons = ttk.Label(frame,text=list[index][1],wraplength=200,
-                                             font=("Helvetica", 14, 'bold'),
+            self.flash_display_lessons = tk.Label(frame,text=list[index][1],width=20,
+                                             font=("Helvetica", 14, 'bold'),height=1,
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
 
-            self.flash_display_lessons.grid(row=0,column=0)
+            self.flash_display_lessons.grid(row=0,column=0,sticky=tk.W)
         except:
             logger.info("Flash Term could not be found")
             logger.exception("Flash Term could not be found")
@@ -242,10 +242,10 @@ class MagicDashboard(tk.Frame):
         try:
             if hasattr(self,"image_display_lessons"):
                 self.image_display_lessons.grid_forget()
-            self.image_display_lessons = ttk.Label(frame,text=list[index][1],wraplength=200,
-                                             font=("Helvetica", 14, 'bold'),
+            self.image_display_lessons = tk.Label(frame,text=list[index][1],width=20,
+                                             font=("Helvetica", 14, 'bold'),height=1,
                                              background=BACKGROUND_COLOR, foreground=FOREGROUND_COLOR)
-            self.image_display_lessons.grid(row=0,column=0)
+            self.image_display_lessons.grid(row=0,column=0,sticky=tk.W)
         except:
             logger.info("Title Lesson not be found or opened")
             logger.exception("Lesson Title could not be opened")
@@ -477,7 +477,7 @@ class MagicDashboard(tk.Frame):
         self.image_star = PhotoImage(file="../images/cup_icon.png")
         self.star_header_label = tk.Label(self.star_group_frame, compound=tk.LEFT,
                                                   image=self.image_star,
-                                                  borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=30,
+                                                  borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
                                                   text=" Celebrate", font=("Helvetica", 12, 'bold'),
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.star_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
