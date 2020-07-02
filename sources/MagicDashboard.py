@@ -107,7 +107,7 @@ class MagicDashboard(tk.Frame):
         self.image_participants = PhotoImage(file="../images/business-class.png")
         self.participants_header_label = tk.Label(self.participants_group_frame, compound=tk.LEFT, image=self.image_participants,
                                              borderwidth=3, highlightcolor="gray18", anchor=tk.W,
-                                             text=" Participants", font=("Helvetica", 12, 'bold'),
+                                             text=" Participants", font=("Helvetica", 14, 'bold'),
                                              background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.participants_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.participants_names_scroll_frame = tk.Frame(self.participants_group_frame, 
@@ -155,8 +155,8 @@ class MagicDashboard(tk.Frame):
         self.lessons_group_frame.grid(row=1, column=0, padx=10,sticky=tk.N)
         self.image_lessons = PhotoImage(file="../images/books.png")
         self.lessons_header_label = tk.Label(self.lessons_group_frame, compound=tk.LEFT, image=self.image_lessons,
-                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=250,
-                                             text=" Lessons", font=("Helvetica", 12, 'bold'),
+                                             borderwidth=3, highlightcolor="gray18", anchor=tk.W,
+                                             text=" Lessons", font=("Helvetica", 14, 'bold'),
                                              background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.lessons_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
         self.lessons_image_scroll_frame = tk.Frame(self.lessons_group_frame,
@@ -168,13 +168,13 @@ class MagicDashboard(tk.Frame):
         title_list_index = 0
         self.lesson_image_display_scroll(self.lessons_image_scroll_frame, self.title_list, title_list_index)
         self.create_button = ttk.Button(self.lessons_group_frame, text="Create",
-                                        width=6,
+                                        width=8,
                                         command=self.create_lesson, style="dashboxbutton.TButton")
         self.edit_button = ttk.Button(self.lessons_group_frame, text="Edit",
-                                      width=6,
+                                      width=8,
                                       command=self.launch_lesson_edit, style="dashboxbutton.TButton")
         self.view_button = ttk.Button(self.lessons_group_frame, text="View",
-                                      width=6,
+                                      width=8,
                                       command=self.lessons_list, style="dashboxbutton.TButton")
         self.create_label = tk.Label(self.lessons_group_frame,
                                      borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
@@ -499,6 +499,7 @@ class MagicDashboard(tk.Frame):
 
 if __name__== "__main__":
     dashboard_app = tk.Tk()
+    dashboard_app.iconphoto(True, tk.PhotoImage(file='../images/lr_logo.png'))
     dashboard_app.configure(background="gray18")
     dashboard_app.title("Learning Room Dashboard")
     screen_width = dashboard_app.winfo_screenwidth()

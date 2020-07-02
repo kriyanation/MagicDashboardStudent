@@ -32,7 +32,7 @@ class MagicTeacherUse():
             mac_address = get_mac_address()
             if mac != mac_address:
                 messagebox.showerror("Installation Moved","The application will close now")
-                #sys.exit()
+                sys.exit()
             else:
                 return
 
@@ -53,7 +53,7 @@ class MagicTeacherUse():
         except sqlite3.OperationalError:
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("Activation Check met with an error")
-            #sys.exit()
+            sys.exit()
 
     def validate_pin(self,pin):
         try:
@@ -75,10 +75,11 @@ class MagicTeacherUse():
                 connection.close()
             else:
                 messagebox.showwarning("Invalid PIN","Invalid PIN, exiting application")
-                #sys.exit()
+                sys.exit()
 
 
 
         except sqlite3.OperationalError:
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("PIN Check met with an error")
+            sys.exit()

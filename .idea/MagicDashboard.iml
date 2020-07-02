@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../Assessment_Generate">
       <sourceFolder url="file://$MODULE_DIR$/../Assessment_Generate/sources" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../Assessment_Generate/venv" />
     </content>
     <content url="file://$MODULE_DIR$/../MagicClassRoomData">
       <sourceFolder url="file://$MODULE_DIR$/../MagicClassRoomData/sources" isTestSource="false" />
@@ -32,7 +33,7 @@
     <content url="file://$MODULE_DIR$/../MagicWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicWizard/source" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (Assessment_Generate)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Print_Assessment" />
     <orderEntry type="module" module-name="Lesson_List_View" />
