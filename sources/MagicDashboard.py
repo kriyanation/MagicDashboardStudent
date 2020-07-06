@@ -326,7 +326,7 @@ class MagicDashboard(tk.Frame):
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
-        launch_player.geometry("1400x800+120+20")
+        launch_player.geometry("1500x900+120+20")
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
