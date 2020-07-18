@@ -14,8 +14,12 @@
     <content url="file://$MODULE_DIR$/../MagicEditWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicEditWizard/source" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../MagicLessonList" />
     <content url="file://$MODULE_DIR$/../MagicPDFSnapshot">
       <sourceFolder url="file://$MODULE_DIR$/../MagicPDFSnapshot/source" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicPrintAssessment">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicPrintAssessment/sources" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../MagicRoomPlayer">
       <sourceFolder url="file://$MODULE_DIR$/../MagicRoomPlayer/source" isTestSource="false" />
@@ -26,8 +30,12 @@
     <content url="file://$MODULE_DIR$/../MagicRoomWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicRoomWizard/source" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../MagicSearch" />
     <content url="file://$MODULE_DIR$/../MagicTimer">
       <sourceFolder url="file://$MODULE_DIR$/../MagicTimer/sources" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../MagicWizard">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicWizard/source" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
