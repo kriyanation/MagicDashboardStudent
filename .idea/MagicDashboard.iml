@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../Assessment_Generate">
       <sourceFolder url="file://$MODULE_DIR$/../Assessment_Generate/sources" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../Assessment_Generate/venv" />
     </content>
     <content url="file://$MODULE_DIR$/../MagicClassRoomData">
       <sourceFolder url="file://$MODULE_DIR$/../MagicClassRoomData/sources" isTestSource="false" />
@@ -37,6 +38,8 @@
     <content url="file://$MODULE_DIR$/../MagicWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicWizard/source" isTestSource="false" />
     </content>
+
+
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Print_Assessment" />

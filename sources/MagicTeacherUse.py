@@ -82,3 +82,4 @@ class MagicTeacherUse():
         except sqlite3.OperationalError:
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("PIN Check met with an error")
+            sys.exit()
