@@ -27,6 +27,7 @@ import tooltip
 from PIL import Image, ImageTk
 
 from MagicTeacherUse import MagicTeacherUse
+from source import MagicSearch
 
 handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
                               backupCount=3)
@@ -256,7 +257,8 @@ class MagicDashboard(tk.Frame):
         self.after(7000,self.lesson_image_display_scroll,frame,list,index)
 
     def launch_content(self):
-        webbrowser.open_new_tab("https://www.dropbox.com/home/Learning%20Room")
+        launch_search = MagicSearch.MagicSearch(self)
+        launch_search.geometry("1000x150+20+20")
 
     def launch_website(self):
         webbrowser.open_new_tab("http://www.wondersky.in/")
