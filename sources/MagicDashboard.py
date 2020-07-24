@@ -27,7 +27,7 @@ import tooltip
 from PIL import Image, ImageTk
 
 from MagicTeacherUse import MagicTeacherUse
-from source import MagicSearch
+import MagicSearch
 
 handler = RotatingFileHandler("../MagicLogs.log", maxBytes=1 * 1024 * 1024,
                               backupCount=3)
@@ -134,7 +134,7 @@ class MagicDashboard(tk.Frame):
                                      foreground=BOX_FOREGROUND_COLOR)
         self.bday_label = tk.Label(self.participants_group_frame,
                                    borderwidth=3, highlightcolor="gray18", anchor=tk.W, width=20,
-                                   text="B'Day Song",
+                                   text="Celebrate B'Day",
                                    font=("Helvetica", 10, 'bold'), background=BOX_BACKGROUND_COLOR,
                                    foreground=BOX_FOREGROUND_COLOR)
 
@@ -258,7 +258,7 @@ class MagicDashboard(tk.Frame):
 
     def launch_content(self):
         launch_search = MagicSearch.MagicSearch(self)
-        launch_search.geometry("1000x150+20+20")
+        launch_search.geometry("1400x150+100+400")
 
     def launch_website(self):
         webbrowser.open_new_tab("http://www.wondersky.in/")
@@ -268,33 +268,31 @@ class MagicDashboard(tk.Frame):
         logger.info("Entering BDay play song")
         self.name = simpledialog.askstring("B'Day Student", "Name",
                                         parent=self)
-        if self.name is None:
-            self.name = ""
+        if self.name is not None:
+            win = tk.Toplevel()
+            win.wm_title("Happy B'Day "+self.name)
+            win.wm_geometry('500x400+600+300')
+            win.resizable(False, False)
+            win.configure(background='steelblue4')
+            win.attributes('-topmost', 'true')
+            self.bday_label = ttk.Label(win, text="Happy B'Day "+self.name,
+                                                font=("helvetica", 18, 'bold'), foreground='white',background="steelblue4")
+            self.bday_wish = tk.PhotoImage(file='../images/bday_wish.png')
+            self.bday_image = ttk.Label(win, image=self.bday_wish)
 
-        win = tk.Toplevel()
-        win.wm_title("Happy B'Day "+self.name)
-        win.wm_geometry('500x400+600+300')
-        win.resizable(False, False)
-        win.configure(background='steelblue4')
-        win.attributes('-topmost', 'true')
-        self.bday_label = ttk.Label(win, text="Happy B'Day "+self.name,
-                                            font=("helvetica", 18, 'bold'), foreground='white',background="steelblue4")
-        self.bday_wish = tk.PhotoImage(file='../images/bday_wish.png')
-        self.bday_image = ttk.Label(win, image=self.bday_wish)
+            self.bday_label.pack(pady=20)
+            self.bday_image.pack(pady=20)
+            current_location = os.getcwd()
+            file_song_path = os.path.abspath(os.path.join(current_location,"..","images","bday_song.mp3"))
 
-        self.bday_label.pack(pady=20)
-        self.bday_image.pack(pady=20)
-        current_location = os.getcwd()
-        file_song_path = os.path.abspath(os.path.join(current_location,"..","images","bday_song.mp3"))
+            if sys.platform == "win32":
+                os.startfile(file_song_path)
+            else:
+                opener = "open" if sys.platform == "darwin" else "xdg-open"
+                subprocess.call([opener, file_song_path])
 
-        if sys.platform == "win32":
-            os.startfile(file_song_path)
-        else:
-            opener = "open" if sys.platform == "darwin" else "xdg-open"
-            subprocess.call([opener, file_song_path])
-
-        b = ttk.Button(win, text="Close", style='Blue.TButton', command=win.destroy)
-        b.pack()
+            b = ttk.Button(win, text="Close", style='Blue.TButton', command=win.destroy)
+            b.pack()
 
 
     def show_names(self,frame, names,n_index):
@@ -312,19 +310,19 @@ class MagicDashboard(tk.Frame):
     def launch_lesson_edit(self):
 
         launch_edit = MagicEditWizard.MagicEditWizard(self)
-        launch_edit.geometry("1300x700+20+20")
+        launch_edit.geometry("1400x800+20+20")
 
     def launch_flashcard(self):
         launch_flashcard = FlashCard.MagicFlashApplication(self)
-        launch_flashcard.geometry("1300x700+120+20")
+        launch_flashcard.geometry("1500x800+120+20")
 
     def launch_assessment_pdf(self):
         launch_assessment = assessment_viewer.MagicAssessmentPrint(self)
-        launch_assessment.geometry("700x300+300+300")
+        launch_assessment.geometry("800x400+300+300")
 
     def launch_class_data(self):
         launch_class = magic_classroom_info.MagicClassRoomData(self)
-        launch_class.geometry("1300x750+20+20")
+        launch_class.geometry("1500x850+20+20")
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
@@ -332,15 +330,15 @@ class MagicDashboard(tk.Frame):
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
-        launch_notes.geometry("700x300+300+300")
+        launch_notes.geometry("800x400+300+300")
 
     def lessons_list(self):
         launch_lessonlist = Lesson_List_Display.MagicLessonList(self)
-        launch_lessonlist.geometry("1200x800+20+20")
+        launch_lessonlist.geometry("1400x850+20+20")
 
     def create_lesson(self):
         launch_Create = create_explainer_content.MagicWizard(self)
-        launch_Create.geometry("1300x700+20+20")
+        launch_Create.geometry("1400x800+20+20")
 
     def launch_timer(self):
         launch_timer = Timer_Display.TimerDisplay(self)
@@ -366,7 +364,7 @@ class MagicDashboard(tk.Frame):
                                                   background=BOX_BACKGROUND_COLOR, foreground=BOX_FOREGROUND_COLOR)
         self.tools_header_label.grid(row=0, columnspan=3, sticky=tk.NSEW)
 
-        self.content_button = ttk.Button(self.tools_group_frame, text="Save",
+        self.content_button = ttk.Button(self.tools_group_frame, text="Search",
                                        width=8,
                                        command=self.launch_content, style="dashboxbutton.TButton")
         self.print_notes_button = ttk.Button(self.tools_group_frame, text="Notes",
@@ -509,7 +507,7 @@ if __name__== "__main__":
 
     screen_half_width = int(dashboard_app.winfo_screenwidth())
     screen_half_height = int(dashboard_app.winfo_screenheight())
-    dashboard_app.geometry("1300x850+200+20")
+    dashboard_app.geometry("1400x850+100+20")
     frame = MagicDashboard(dashboard_app)
 
     #dashboard_app.rowconfigure(0,weight=1)

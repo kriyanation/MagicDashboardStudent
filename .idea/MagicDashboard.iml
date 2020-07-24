@@ -31,16 +31,16 @@
     <content url="file://$MODULE_DIR$/../MagicRoomWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicRoomWizard/source" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../MagicSearch" />
+    <content url="file://$MODULE_DIR$/../MagicSearch">
+      <sourceFolder url="file://$MODULE_DIR$/../MagicSearch/source" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../MagicTimer">
       <sourceFolder url="file://$MODULE_DIR$/../MagicTimer/sources" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../MagicWizard">
       <sourceFolder url="file://$MODULE_DIR$/../MagicWizard/source" isTestSource="false" />
     </content>
-
-
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Print_Assessment" />
     <orderEntry type="module" module-name="Lesson_List_View" />
