@@ -2,7 +2,7 @@ import logging
 import sqlite3
 
 import bcrypt as bcrypt
-import sys
+import sys, platform
 
 from getmac import get_mac_address
 from tkinter import messagebox, simpledialog
@@ -29,7 +29,7 @@ class MagicTeacherUse():
             cur.execute(sql)
             mac = cur.fetchone()[0]
             cur.connection.close()
-            mac_address = get_mac_address()
+            mac_address = platform.node()
             if mac != mac_address:
                 messagebox.showerror("Installation Moved","The application will close now")
                 sys.exit()
@@ -65,7 +65,7 @@ class MagicTeacherUse():
             cur.connection.close()
             if bcrypt.checkpw(pin.encode("utf-8"),PIN):
                 activated_status = 0
-                mac_address = get_mac_address()
+                mac_address = platform.node()
                 connection = sqlite3.connect("MagicCheck")
                 cur = connection.cursor()
                 sql = "update Check_Teacher set Activation=?,MAC = ?"

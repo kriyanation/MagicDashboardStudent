@@ -258,7 +258,8 @@ class MagicDashboard(tk.Frame):
 
     def launch_content(self):
         launch_search = MagicSearch.MagicSearch(self)
-        launch_search.geometry("1400x150+100+400")
+        launch_search.attributes("-topmost", True)
+        launch_search.geometry("1100x220+180+750")
 
     def launch_website(self):
         webbrowser.open_new_tab("http://www.wondersky.in/")
