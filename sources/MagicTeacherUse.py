@@ -1,5 +1,5 @@
 import logging
-import sqlite3
+import sqlite3, random
 
 import bcrypt as bcrypt
 import sys, platform
@@ -17,6 +17,8 @@ class MagicTeacherUse():
             pin_string = simpledialog.askstring("Enter PIN", "Please Enter the 6 Letter PIN",parent=parent)
 
             self.validate_pin(pin_string)
+            self.insertclass_id()
+            self.insertuser()
             gp.deiconify()
         else:
             self.validate_mac()
@@ -83,3 +85,35 @@ class MagicTeacherUse():
             messagebox.showerror("Database Issue", "Issue with database connection")
             logger.exception("PIN Check met with an error")
             sys.exit()
+
+    def insertclass_id(self):
+        try:
+            connection = sqlite3.connect("../MagicRoom.db")
+            cur = connection.cursor()
+            number = random.randint(10000,99999)
+            sql ="update Magic_Teacher_Data set class_id=? where Class_No=1"
+            cur.execute(sql, (number, ))
+            connection.commit()
+            connection.close()
+
+        except sqlite3.OperationalError:
+            messagebox.showerror("Database Issue", "Issue with database connection")
+            logger.exception("Data setup met with an error")
+
+    def insertuser(self):
+        try:
+            connection = sqlite3.connect("MagicCheck")
+            cur = connection.cursor()
+            sql = "select EMAIL from Check_Teacher"
+            cur.execute(sql)
+            user = cur.fetchone()[0]
+            cur.connection.close()
+            connection = sqlite3.connect("../MagicRoom.db")
+            cur = connection.cursor()
+            sql = "update Magic_Teacher_Data set User=? where Class_No=1"
+            cur.execute(sql, (user,  ))
+            connection.commit()
+            connection.close()
+        except sqlite3.OperationalError:
+            messagebox.showerror("Database Issue", "Issue with database connection")
+            logger.exception("Data setup met with an error")
