@@ -5,17 +5,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../Assessment_Generate/sources" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../Assessment_Generate/venv" />
     </content>
-    <content url="file://$MODULE_DIR$/../MagicClassRoomData">
-      <sourceFolder url="file://$MODULE_DIR$/../MagicClassRoomData/sources" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/sources" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <content url="file://$MODULE_DIR$/../MagicEditWizard">
-      <sourceFolder url="file://$MODULE_DIR$/../MagicEditWizard/source" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../MagicLessonList" />
+    <content url="file://$MODULE_DIR$/../MagicLessonListStudent" />
     <content url="file://$MODULE_DIR$/../MagicPDFSnapshot">
       <sourceFolder url="file://$MODULE_DIR$/../MagicPDFSnapshot/source" isTestSource="false" />
     </content>
@@ -28,17 +22,8 @@
     <content url="file://$MODULE_DIR$/../MagicRoomRecap">
       <sourceFolder url="file://$MODULE_DIR$/../MagicRoomRecap/sources" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../MagicRoomWizard">
-      <sourceFolder url="file://$MODULE_DIR$/../MagicRoomWizard/source" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../MagicSearch">
-      <sourceFolder url="file://$MODULE_DIR$/../MagicSearch/source" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$/../MagicTimer">
       <sourceFolder url="file://$MODULE_DIR$/../MagicTimer/sources" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../MagicWizard">
-      <sourceFolder url="file://$MODULE_DIR$/../MagicWizard/source" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (MagicDashboard) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
