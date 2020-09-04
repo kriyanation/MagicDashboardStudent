@@ -44,7 +44,7 @@ class MagicDashboard(tk.Frame):
     def __init__(self,parent,*args,**kwargs):
         super().__init__(parent,*args,**kwargs)
         logger.info("Entering MagicDashboard Initialize")
-        teacher_check = MagicTeacherUse(self,parent)
+        #teacher_check = MagicTeacherUse(self,parent)
         self.configure(background=BACKGROUND_COLOR)
         s = ttk.Style()
         s.theme_use('clam')
@@ -125,11 +125,11 @@ class MagicDashboard(tk.Frame):
 
     def lessons_list(self):
         launch_lessonlist = Lesson_List_Display.MagicLessonList(self)
-        launch_lessonlist.geometry("1400x850+20+20")
+        launch_lessonlist.geometry(str(self.winfo_screenwidth())+"x"+str(self.winfo_screenheight())+"+0+0")
 
     def launch_player(self):
         launch_player = magiccontainer.MagicApplication(self)
-        launch_player.geometry("1500x900+120+20")
+        launch_player.geometry(str(self.winfo_screenwidth())+"x"+str(self.winfo_screenheight())+"+0+0")
 
     def launch_pdf_notes(self):
         launch_notes = snapshot_view.SnapshotView(self)
